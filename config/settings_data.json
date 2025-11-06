@@ -1,0 +1,115 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "sections": {
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "blocks": {
+          "announcement-bar-0": {
+            "type": "message",
+            "settings": {
+              "message": "ENTREGAS DE 5 A 10 DÍAS HÁBILES POR ALTO FLUJO DE PEDIDOS. ¡GRACIAS POR TU PACIENCIA!"
+            }
+          },
+          "announcement-bar-1": {
+            "type": "message",
+            "settings": {
+              "message": "HASTA 50% DCTO EN REF. SELECCIONADAS | EXCLUSIVO ONLINE | COMPRA AHORA"
+            }
+          },
+          "announcement-bar-2": {
+            "type": "message",
+            "settings": {
+              "message": "ENVÍO GRATIS POR COMPRAS SUPERIORES A $350.000"
+            }
+          }
+        },
+        "block_order": [
+          "announcement-bar-0",
+          "announcement-bar-1",
+          "announcement-bar-2"
+        ],
+        "settings": {
+          "message": "¡ENVÍO GRATIS EN TODAS LAS COMPRAS! HASTA AGOTAR EXISTENCIAS.",
+          "color_scheme": "accent-1"
+        }
+      },
+      "header": {
+        "type": "header",
+        "settings": {
+          "color_scheme": "background-1",
+          "logo": "shopify://shop_images/7v6z9hhu_400x400_4ba8948b-4308-4a58-b493-bfe965e69dd6.jpg",
+          "logo_width": 220
+        }
+      },
+      "featured-collection": {
+        "type": "featured-collection",
+        "settings": {
+          "title": "LO NUEVO | CAMISETAS EXCLUSIVAS",
+          "collection": "",
+          "products_to_show": 4,
+          "show_view_all": true,
+          "color_scheme": "background-1"
+        }
+      },
+      "featured-product": {
+        "type": "featured-product",
+        "settings": {
+          "color_scheme": "background-1"
+        }
+      },
+      "slogan-section": {
+        "type": "slogan-section",
+        "settings": {
+          "slogan": "VERDE Y BLANCO: UNA PASIÓN DE DOS COLORES.",
+          "color_scheme": "background-1"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "footer-0": {
+            "type": "link_list",
+            "settings": {
+              "heading": "VERDOLAGA, ¡TE AYUDAMOS!",
+              "menu": "footer"
+            }
+          },
+          "footer-1": {
+            "type": "link_list",
+            "settings": {
+              "heading": "VERDOLAGA, ¡TE AYUDAMOS!",
+              "menu": "footer"
+            }
+          },
+          "footer-2": {
+            "type": "text",
+            "settings": {
+              "heading": "NUESTRA EMPRESA",
+              "subtext": "<p>NEGRO JUST - Tu tienda oficial de productos verdolagas</p>"
+            }
+          }
+        },
+        "block_order": [
+          "footer-0",
+          "footer-1",
+          "footer-2"
+        ],
+        "settings": {
+          "logo": "shopify://shop_images/7v6z9hhu_400x400_4ba8948b-4308-4a58-b493-bfe965e69dd6.jpg",
+          "color_scheme": "background-1",
+          "show_social": true
+        }
+      }
+    },
+    "content_for_index": []
+  }
+}
