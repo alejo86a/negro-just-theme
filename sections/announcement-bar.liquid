@@ -1,0 +1,104 @@
+{% comment %}
+  Announcement Bar Section - Sticky promotional banner
+{% endcomment %}
+
+<div class="announcement-bar color-{{ section.settings.color_scheme }} gradient visible" role="region" aria-label="{{ 'sections.announcement_bar.label' | t }}" {{ block.shopify_attributes }}>
+  <div class="page-width" style="position: relative; min-height: 2rem;">
+    {%- for block in section.blocks -%}
+      {%- if block.settings.message != blank -%}
+        <p class="announcement-bar__message h5 {% if forloop.first %}active{% endif %}" data-message-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+          {{ block.settings.message }}
+        </p>
+      {%- endif -%}
+    {%- endfor -%}
+    {%- if section.blocks.size == 0 -%}
+      <p class="announcement-bar__message h5 active">
+        {%- if section.settings.message != blank -%}
+          {{ section.settings.message }}
+        {%- else -%}
+          {{ 'sections.announcement_bar.default_message' | t }}
+        {%- endif -%}
+      </p>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "class": "section-announcement-bar",
+  "settings": [
+    {
+      "type": "text",
+      "id": "message",
+      "default": "¡ENVÍO GRATIS EN TODAS LAS COMPRAS! HASTA AGOTAR EXISTENCIAS.",
+      "label": "Default Announcement Message"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "accent-1",
+      "label": "Color Scheme"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Promotional Message",
+      "settings": [
+        {
+          "type": "text",
+          "id": "message",
+          "default": "¡ENVÍO GRATIS EN TODAS LAS COMPRAS! HASTA AGOTAR EXISTENCIAS.",
+          "label": "Message"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "message",
+        "settings": {
+          "message": "ENTREGAS DE 5 A 10 DÍAS HÁBILES POR ALTO FLUJO DE PEDIDOS. ¡GRACIAS POR TU PACIENCIA!"
+        }
+      },
+      {
+        "type": "message",
+        "settings": {
+          "message": "HASTA 50% DCTO EN REF. SELECCIONADAS | EXCLUSIVO ONLINE | COMPRA AHORA"
+        }
+      },
+      {
+        "type": "message",
+        "settings": {
+          "message": "ENVÍO GRATIS POR COMPRAS SUPERIORES A $350.000"
+        }
+      }
+    ]
+  }
+}
+{% endschema %}
+

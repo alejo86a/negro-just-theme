@@ -1,0 +1,66 @@
+{% comment %}
+  Product Card Snippet with hover animation
+{% endcomment %}
+
+<div class="product-card" data-product-id="{{ product.id }}">
+  <div class="product-card__wrapper">
+    <a href="{{ product.url }}" class="product-card__link">
+      <div class="product-card__media">
+        {%- if product.featured_media != blank -%}
+          <img
+            srcset="{%- if product.featured_media.width >= 165 -%}{{ product.featured_media | image_url: width: 165 }} 165w,{%- endif -%}
+                    {%- if product.featured_media.width >= 330 -%}{{ product.featured_media | image_url: width: 330 }} 330w,{%- endif -%}
+                    {%- if product.featured_media.width >= 535 -%}{{ product.featured_media | image_url: width: 535 }} 535w,{%- endif -%}
+                    {%- if product.featured_media.width >= 750 -%}{{ product.featured_media | image_url: width: 750 }} 750w,{%- endif -%}
+                    {{ product.featured_media | image_url }} {{ product.featured_media.width }}w"
+            src="{{ product.featured_media | image_url: width: 533 }}"
+            sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
+            alt="{{ product.featured_media.alt | escape }}"
+            loading="lazy"
+            width="{{ product.featured_media.width }}"
+            height="{{ product.featured_media.height }}"
+            class="product-card__image product-card__image--primary"
+          >
+          {%- if product.media[1] != blank -%}
+            <img
+              srcset="{%- if product.media[1].width >= 165 -%}{{ product.media[1] | image_url: width: 165 }} 165w,{%- endif -%}
+                      {%- if product.media[1].width >= 330 -%}{{ product.media[1] | image_url: width: 330 }} 330w,{%- endif -%}
+                      {%- if product.media[1].width >= 535 -%}{{ product.media[1] | image_url: width: 535 }} 535w,{%- endif -%}
+                      {%- if product.media[1].width >= 750 -%}{{ product.media[1] | image_url: width: 750 }} 750w,{%- endif -%}
+                      {{ product.media[1] | image_url }} {{ product.media[1].width }}w"
+              src="{{ product.media[1] | image_url: width: 533 }}"
+              sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
+              alt="{{ product.media[1].alt | escape }}"
+              loading="lazy"
+              width="{{ product.media[1].width }}"
+              height="{{ product.media[1].height }}"
+              class="product-card__image product-card__image--secondary"
+            >
+          {%- endif -%}
+        {%- else -%}
+          {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+      </div>
+      <div class="product-card__info">
+        <h3 class="product-card__title h3">{{ product.title | escape }}</h3>
+        <div class="product-card__price">
+          {%- if product.compare_at_price > product.price -%}
+            <span class="product-card__price--sale">{{ product.price | money }}</span>
+            <span class="product-card__price--compare">{{ product.compare_at_price | money }}</span>
+          {%- else -%}
+            {{ product.price | money }}
+          {%- endif -%}
+        </div>
+      </div>
+    </a>
+    <div class="product-card__quick-add">
+      <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        <button type="submit" name="add" class="button button--primary product-card__button">
+          {{ 'products.product.add_to_cart' | t }}
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,97 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "NEGRO JUST",
+    "theme_version": "1.0.0",
+    "theme_author": "NEGRO JUST",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Primary Color (Dark Forest Green)",
+        "default": "#1E442F"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent Color (Bright Green)",
+        "default": "#6BFF4E"
+      },
+      {
+        "type": "color",
+        "id": "color_secondary_accent",
+        "label": "Secondary Accent (Gold)",
+        "default": "#FFC700"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Text Color (Off-White)",
+        "default": "#F0EAD6"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "font_heading",
+        "label": "Heading Font",
+        "default": "oswald_n4"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_body",
+        "label": "Body Font",
+        "default": "source_sans_pro_n4"
+      }
+    ]
+  },
+  {
+    "name": "Social Media",
+    "settings": [
+      {
+        "type": "url",
+        "id": "social_facebook_link",
+        "label": "Facebook Link"
+      },
+      {
+        "type": "url",
+        "id": "social_instagram_link",
+        "label": "Instagram Link"
+      },
+      {
+        "type": "url",
+        "id": "social_twitter_link",
+        "label": "Twitter Link"
+      },
+      {
+        "type": "url",
+        "id": "social_youtube_link",
+        "label": "YouTube Link"
+      }
+    ]
+  },
+  {
+    "name": "Layout",
+    "settings": [
+      {
+        "type": "range",
+        "id": "page_width",
+        "min": 1000,
+        "max": 1600,
+        "step": 100,
+        "default": 1200,
+        "unit": "px",
+        "label": "Page Width"
+      }
+    ]
+  }
+]
+

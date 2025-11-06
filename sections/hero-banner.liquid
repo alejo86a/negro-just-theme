@@ -1,0 +1,157 @@
+{% comment %}
+  Hero Banner Section - Carousel/Slider
+{% endcomment %}
+
+<div class="hero-banner color-{{ section.settings.color_scheme }} gradient">
+  <div class="hero-banner__carousel">
+    {%- for block in section.blocks -%}
+      <div class="hero-banner__slide {% if forloop.first %}active{% endif %}" data-slide-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+        <div class="hero-banner__wrapper">
+          {%- if block.settings.image != blank -%}
+            <img
+              srcset="{%- if block.settings.image.width >= 750 -%}{{ block.settings.image | image_url: width: 750 }} 750w,{%- endif -%}
+                      {%- if block.settings.image.width >= 1500 -%}{{ block.settings.image | image_url: width: 1500 }} 1500w,{%- endif -%}
+                      {%- if block.settings.image.width >= 3000 -%}{{ block.settings.image | image_url: width: 3000 }} 3000w,{%- endif -%}
+                      {{ block.settings.image | image_url }} {{ block.settings.image.width }}w"
+              src="{{ block.settings.image | image_url: width: 1500 }}"
+              sizes="100vw"
+              alt="{{ block.settings.heading | escape }}"
+              loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+              class="hero-banner__background-image"
+            >
+          {%- endif -%}
+          <div class="hero-banner__overlay"></div>
+          <div class="hero-banner__content page-width">
+            {%- if block.settings.heading != blank -%}
+              <h2 class="hero-banner__heading h0">{{ block.settings.heading }}</h2>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <div class="hero-banner__text rte">{{ block.settings.text }}</div>
+            {%- endif -%}
+            {%- if block.settings.button_label != blank -%}
+              <a href="{{ block.settings.button_link }}" class="button button--primary hero-banner__button">
+                {{ block.settings.button_label }}
+              </a>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+  {%- if section.blocks.size > 1 -%}
+    <div class="hero-banner__dots">
+      {%- for block in section.blocks -%}
+        <button class="hero-banner__dot {% if forloop.first %}active{% endif %}" data-dot-index="{{ forloop.index0 }}" aria-label="Go to slide {{ forloop.index }}"></button>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</div>
+<div class="scratch-stripes-top"></div>
+
+{% schema %}
+{
+  "name": "Hero Banner",
+  "tag": "section",
+  "class": "section-hero-banner",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "background-1",
+      "label": "Color Scheme"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Slide Image"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "NUEVA COLECCIÓN",
+          "label": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>Descubre la pasión verdolaga con nuestra colección exclusiva</p>",
+          "label": "Text"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "default": "CONÓCELA AQUÍ",
+          "label": "Button Label"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "slide",
+        "settings": {
+          "heading": "NUEVA COLECCIÓN",
+          "text": "<p>Descubre la pasión verdolaga</p>",
+          "button_label": "CONÓCELA AQUÍ"
+        }
+      },
+      {
+        "type": "slide",
+        "settings": {
+          "heading": "BUSO RETRO LIBERTADORES '89",
+          "text": "<p>Edición limitada</p>",
+          "button_label": "COMPRAR BUSOS"
+        }
+      },
+      {
+        "type": "slide",
+        "settings": {
+          "heading": "CAMISETA LOCAL 2025",
+          "text": "<p>La nueva camiseta oficial</p>",
+          "button_label": "COMPRAR AHORA"
+        }
+      }
+    ]
+  },
+  "presets": [
+    {
+      "name": "Hero Banner"
+    }
+  ]
+}
+{% endschema %}
+

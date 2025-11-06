@@ -1,0 +1,64 @@
+{
+  "general": {
+    "meta": {
+      "tags": "Tagged \"{{ tags }}\"",
+      "page": "Page {{ page }}"
+    },
+    "common": {
+      "search": "Search"
+    }
+  },
+  "accessibility": {
+    "skip_to_text": "Skip to content",
+    "refresh_page": "Choosing a selection results in a full page refresh.",
+    "link_messages": {
+      "new_window": "Opens in a new window."
+    }
+  },
+  "sections": {
+    "announcement_bar": {
+      "label": "Announcement bar",
+      "default_message": "¡ENVÍO GRATIS EN TODAS LAS COMPRAS! HASTA AGOTAR EXISTENCIAS."
+    },
+    "header": {
+      "menu": "Menu",
+      "cart_count": "{{ count }} items in cart"
+    },
+    "cart": {
+      "cart_error": "There was an error while updating your cart. Please try again.",
+      "cart_quantity_error_html": "You can only add {{ quantity }} of this item to your cart."
+    },
+    "featured_collection": {
+      "view_all": "View All"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to Cart",
+      "sold_out": "Sold Out",
+      "unavailable": "Unavailable",
+      "title": "Product"
+    }
+  },
+  "templates": {
+    "cart": {
+      "cart": "Cart"
+    }
+  },
+  "customer": {
+    "account": {
+      "title": "Account"
+    }
+  },
+  "newsletter": {
+    "label": "Email address",
+    "button_label": "Subscribe",
+    "success": "Thanks for subscribing!"
+  },
+  "sections": {
+    "footer": {
+      "copyright": "All rights reserved."
+    }
+  }
+}
+

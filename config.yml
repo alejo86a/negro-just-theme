@@ -1,0 +1,10 @@
+development:
+  password: ""
+  theme_id: ""
+  store: negro-just.myshopify.com
+
+production:
+  password: ""
+  theme_id: ""
+  store: negro-just.myshopify.com
+

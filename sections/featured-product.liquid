@@ -1,0 +1,157 @@
+{% comment %}
+  Featured Product Section - Current Kit (Camiseta ¡LOCAL 2025!)
+{% endcomment %}
+
+{%- liquid
+  assign product = section.settings.product
+-%}
+
+<div class="featured-product color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width">
+    <div class="featured-product__carousel">
+      {%- for block in section.blocks -%}
+        <div class="featured-product__slide{% if forloop.first %} active{% endif %}" {{ block.shopify_attributes }}>
+          <div class="featured-product__wrapper grid grid--2-col">
+            <div class="featured-product__media">
+              <span class="featured-product__media-text">{{ block.settings.media_text }}</span>
+            </div>
+            <div class="featured-product__content">
+              {%- if block.settings.title != blank -%}
+                <h2 class="featured-product__title h1">{{ block.settings.title }}</h2>
+              {%- endif -%}
+              {%- if block.settings.product_title != blank -%}
+                <h3 class="featured-product__product-title h2">{{ block.settings.product_title }}</h3>
+              {%- endif -%}
+              {%- if block.settings.description != blank -%}
+                <div class="featured-product__description rte">
+                  <p>{{ block.settings.description }}</p>
+                </div>
+              {%- endif -%}
+              {%- if block.settings.price != blank -%}
+                <div class="featured-product__price">{{ block.settings.price }}</div>
+              {%- endif -%}
+              {%- if block.settings.button_label != blank -%}
+                <a href="{{ block.settings.button_link }}" class="button button--primary featured-product__button">
+                  {{ block.settings.button_label }}
+                </a>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Featured Product",
+  "tag": "section",
+  "class": "section-featured-product",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "background-1",
+      "label": "Color Scheme"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_slide",
+      "name": "Product Slide",
+      "settings": [
+        {
+          "type": "text",
+          "id": "media_text",
+          "default": "LOCAL 2025",
+          "label": "Media Text"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "default": "EL EQUIPO OFICIAL",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "product_title",
+          "default": "Camiseta ¡LOCAL 2025!",
+          "label": "Product Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "default": "La camiseta oficial del equipo verdolaga para la temporada 2025.",
+          "label": "Description"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "default": "$99.99",
+          "label": "Price"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "default": "Agregar al Carrito",
+          "label": "Button Label"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Product",
+      "blocks": [
+        {
+          "type": "product_slide",
+          "settings": {
+            "media_text": "LOCAL 2025",
+            "title": "EL EQUIPO OFICIAL",
+            "product_title": "Camiseta ¡LOCAL 2025!",
+            "description": "La camiseta oficial del equipo verdolaga para la temporada 2025."
+          }
+        },
+        {
+          "type": "product_slide",
+          "settings": {
+            "media_text": "VISITANTE 2025",
+            "title": "LA NUEVA ALTERNATIVA",
+            "product_title": "Camiseta ¡VISITANTE 2025!",
+            "description": "La nueva camiseta de visitante para la temporada 2025."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+

@@ -1,0 +1,16 @@
+{% comment %}
+  Product Card Placeholder Snippet
+{% endcomment %}
+
+<div class="product-card">
+  <div class="product-card__wrapper">
+    <div class="product-card__media">
+      {{ 'product-' | append: index | placeholder_svg_tag: 'placeholder-svg' }}
+    </div>
+    <div class="product-card__info">
+      <h3 class="product-card__title h3">{{ 'products.product.title' | t }} {{ index }}</h3>
+      <div class="product-card__price">{{ 99.99 | money }}</div>
+    </div>
+  </div>
+</div>
+

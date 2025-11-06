@@ -1,0 +1,47 @@
+{% comment %}
+  Social Icons Snippet
+{% endcomment %}
+
+<ul class="social-icons list-unstyled list-social" role="list">
+  {%- if settings.social_facebook_link != blank -%}
+    <li class="list-social__item">
+      <a href="{{ settings.social_facebook_link }}" class="link list-social__link">
+        <svg class="icon icon-facebook" aria-hidden="true" focusable="false" role="presentation">
+          <use href="#icon-facebook"></use>
+        </svg>
+        <span class="visually-hidden">Facebook</span>
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_instagram_link != blank -%}
+    <li class="list-social__item">
+      <a href="{{ settings.social_instagram_link }}" class="link list-social__link">
+        <svg class="icon icon-instagram" aria-hidden="true" focusable="false" role="presentation">
+          <use href="#icon-instagram"></use>
+        </svg>
+        <span class="visually-hidden">Instagram</span>
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_twitter_link != blank -%}
+    <li class="list-social__item">
+      <a href="{{ settings.social_twitter_link }}" class="link list-social__link">
+        <svg class="icon icon-twitter" aria-hidden="true" focusable="false" role="presentation">
+          <use href="#icon-twitter"></use>
+        </svg>
+        <span class="visually-hidden">Twitter</span>
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_youtube_link != blank -%}
+    <li class="list-social__item">
+      <a href="{{ settings.social_youtube_link }}" class="link list-social__link">
+        <svg class="icon icon-youtube" aria-hidden="true" focusable="false" role="presentation">
+          <use href="#icon-youtube"></use>
+        </svg>
+        <span class="visually-hidden">YouTube</span>
+      </a>
+    </li>
+  {%- endif -%}
+</ul>
+

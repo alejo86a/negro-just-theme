@@ -1,0 +1,261 @@
+{% comment %}
+  Footer Section
+{% endcomment %}
+
+<footer class="footer color-{{ section.settings.color_scheme }} gradient">
+  <div class="footer__content-top page-width">
+    {%- if section.settings.logo != blank -%}
+      <div class="footer__logo">
+        <img
+          src="{{ section.settings.logo | image_url: width: 300 }}"
+          alt="{{ shop.name }}"
+          class="footer__logo-image"
+          width="150"
+          loading="lazy"
+        >
+      </div>
+    {%- endif -%}
+    
+    <div class="footer__main-content">
+      {%- for block in section.blocks -%}
+        <div class="footer-block" {{ block.shopify_attributes }}>
+          {%- case block.type -%}
+            {%- when 'link_list' -%}
+              {%- if block.settings.menu != blank -%}
+                <h2 class="footer-block__heading h4">{{ block.settings.heading }}</h2>
+                <ul class="footer-block__details-content list-unstyled">
+                  {%- for link in block.settings.menu.links -%}
+                    <li>
+                      <a href="{{ link.url }}" class="link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}">
+                        {{ link.title }}
+                      </a>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+            {%- when 'text' -%}
+              <h2 class="footer-block__heading h4">{{ block.settings.heading }}</h2>
+              <div class="footer-block__details-content rte">
+                {{ block.settings.subtext }}
+              </div>
+            {%- when 'newsletter' -%}
+              <h2 class="footer-block__heading h4">{{ block.settings.heading }}</h2>
+              {%- if block.settings.text != blank -%}
+                <p class="footer-block__text">{{ block.settings.text }}</p>
+              {%- endif -%}
+              {% form 'customer', class: 'newsletter-form' %}
+                <input type="hidden" name="contact[tags]" value="newsletter">
+                <div class="newsletter-form__field-wrapper">
+                  <div class="field">
+                    <input
+                      id="NewsletterForm--{{ section.id }}"
+                      type="email"
+                      name="contact[email]"
+                      class="field__input"
+                      value="{{ form.email }}"
+                      aria-required="true"
+                      autocorrect="off"
+                      autocapitalize="off"
+                      autocomplete="email"
+                      {% if form.errors %}
+                        autofocus
+                        aria-invalid="true"
+                        aria-describedby="Newsletter-error--{{ section.id }}"
+                      {% elsif form.posted_successfully? %}
+                        aria-describedby="Newsletter-success--{{ section.id }}"
+                      {% endif %}
+                      placeholder="{{ 'newsletter.label' | t }}"
+                      required
+                    >
+                  </div>
+                  <button type="submit" class="button button--primary newsletter-form__button" name="commit" id="Subscribe">
+                    {{ 'newsletter.button_label' | t }}
+                  </button>
+                </div>
+                {%- if form.errors -%}
+                  <small class="newsletter-form__message form__message" id="Newsletter-error--{{ section.id }}">
+                    {{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}.
+                  </small>
+                {%- endif -%}
+                {%- if form.posted_successfully? -%}
+                  <h3 class="newsletter-form__message newsletter-form__message--success form__message" id="Newsletter-success--{{ section.id }}" tabindex="-1" autofocus>
+                    {{ 'newsletter.success' | t }}
+                  </h3>
+                {%- endif -%}
+              {% endform %}
+            {%- when 'location' -%}
+              <h2 class="footer-block__heading h4">{{ block.settings.heading }}</h2>
+              {%- if block.settings.address != blank -%}
+                <div class="footer-block__details-content rte">{{ block.settings.address }}</div>
+              {%- endif -%}
+              {%- if block.settings.address_link != blank -%}
+                <a href="{{ block.settings.address_link }}" class="button button--secondary" target="_blank" rel="noopener noreferrer">
+                  {{ block.settings.address_link_text | default: 'Ver en mapa' }}
+                </a>
+              {%- endif -%}
+          {%- endcase -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+
+  <div class="footer__content-bottom">
+    <div class="footer__content-bottom-wrapper page-width">
+      <div class="footer__copyright caption">
+        <small class="copyright__content">&copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: routes.root_url }}. {{ 'sections.footer.copyright' | t }}</small>
+      </div>
+      {%- if section.settings.show_social -%}
+        <div class="footer__social">
+          {%- render 'social-icons' -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "blocks": [
+    {
+      "type": "link_list",
+      "name": "Menu",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "VERDOLAGA, ¡TE AYUDAMOS!",
+          "label": "Heading"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "default": "footer",
+          "label": "Menu",
+          "info": "Select a menu to display"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "NUESTRA EMPRESA",
+          "label": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "subtext",
+          "default": "<p>NEGRO JUST - Tu tienda oficial de productos verdolagas</p>",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "type": "newsletter",
+      "name": "Newsletter",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Newsletter",
+          "label": "Heading"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "default": "Suscríbete para recibir las últimas novedades",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "type": "location",
+      "name": "Location",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Ubicación",
+          "label": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "address",
+          "default": "<p>Calle 123, Ciudad<br>Colombia</p>",
+          "label": "Address"
+        },
+        {
+          "type": "url",
+          "id": "address_link",
+          "label": "Address Link (Map URL)"
+        },
+        {
+          "type": "text",
+          "id": "address_link_text",
+          "default": "Ver en mapa",
+          "label": "Address Link Text"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Footer Logo"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "background-1",
+      "label": "Color Scheme"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "default": true,
+      "label": "Show Social Media Icons"
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "link_list"
+      },
+      {
+        "type": "link_list"
+      },
+      {
+        "type": "text"
+      }
+    ]
+  }
+}
+{% endschema %}
+

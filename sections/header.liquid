@@ -1,0 +1,159 @@
+{% comment %}
+  Header Section - Main navigation with logo and cart
+{% endcomment %}
+
+<header class="header-wrapper color-{{ section.settings.color_scheme }} visible">
+  <div class="header page-width">
+    <div class="header__logo">
+      {%- if section.settings.logo != blank -%}
+        <a href="{{ routes.root_url }}" class="header__logo-link">
+          <img src="{{ section.settings.logo | image_url: width: 50, height: 50 }}" alt="{{ shop.name }}" class="header__logo-image" width="50" height="50" loading="eager">
+        </a>
+      {%- endif -%}
+      <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
+        {%- if template == 'index' -%}
+          <h1 class="header__heading-text h1">
+            <span class="logo-text">NEGRO JUST</span>
+          </h1>
+        {%- else -%}
+          <div class="header__heading-text h1">
+            <span class="logo-text">NEGRO JUST</span>
+          </div>
+        {%- endif -%}
+      </a>
+    </div>
+
+    <div class="header__search">
+      <form action="{{ routes.search_url }}" method="get" role="search">
+        <input type="search" name="q" class="header__search-input" placeholder="{{ 'general.common.search' | t }}" value="{{ search.terms | escape }}" autocomplete="off">
+        <button type="submit" class="header__search-button" aria-label="{{ 'general.common.search' | t }}">
+          <svg class="icon icon-search" aria-hidden="true" focusable="false" role="presentation" style="width: 20px; height: 20px;">
+            <use href="#icon-search"></use>
+          </svg>
+        </button>
+      </form>
+    </div>
+
+    <div class="header__inline-menu">
+      <nav class="header__menu">
+        <ul class="list-menu list-menu--inline" role="list">
+          <li>
+            <a href="{{ routes.root_url }}" class="header__menu-item list-menu__item link focus-inset">
+              <span>Home</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{ routes.collections_url }}/camisetas" class="header__menu-item list-menu__item link focus-inset">
+              <span>CAMISETAS</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{ routes.collections_url }}/busos" class="header__menu-item list-menu__item link focus-inset">
+              <span>BUSOS</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{ routes.collections_url }}/gorras" class="header__menu-item list-menu__item link focus-inset">
+              <span>GORRAS</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{ routes.collections_url }}/lo-nuevo" class="header__menu-item list-menu__item link focus-inset">
+              <span>LO NUEVO</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="header__icons">
+      <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
+        <svg class="icon icon-cart" aria-hidden="true" focusable="false" role="presentation">
+          <use href="#icon-cart"></use>
+        </svg>
+        <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
+        <div class="cart-count-bubble">
+          {%- if cart.item_count < 100 -%}
+            <span aria-hidden="true">{{ cart.item_count }}</span>
+          {%- endif -%}
+          <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
+        </div>
+      </a>
+      <a href="{{ routes.account_url }}" class="header__icon header__icon--account link focus-inset" aria-label="{{ 'customer.account.title' | t }}">
+        <svg class="icon icon-account" aria-hidden="true" focusable="false" role="presentation">
+          <use href="#icon-account"></use>
+        </svg>
+      </a>
+      <button type="button" class="header__icon header__icon--menu header__icon--summary link focus-inset" aria-label="{{ 'sections.header.menu' | t }}">
+        <svg class="icon icon-hamburger" aria-hidden="true" focusable="false" role="presentation">
+          <use href="#icon-hamburger"></use>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu" style="display: none;">
+  <nav class="mobile-menu__nav">
+    <ul class="list-menu" role="list">
+      <li><a href="{{ routes.root_url }}">Home</a></li>
+      <li><a href="{{ routes.collections_url }}/camisetas">CAMISETAS</a></li>
+      <li><a href="{{ routes.collections_url }}/busos">BUSOS</a></li>
+      <li><a href="{{ routes.collections_url }}/gorras">GORRAS</a></li>
+      <li><a href="{{ routes.collections_url }}/lo-nuevo">LO NUEVO</a></li>
+    </ul>
+  </nav>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "section-header",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "background-1",
+      "label": "Color Scheme"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo Image"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 50,
+      "max": 250,
+      "step": 10,
+      "default": 150,
+      "unit": "px",
+      "label": "Logo Width"
+    }
+  ]
+}
+{% endschema %}
+

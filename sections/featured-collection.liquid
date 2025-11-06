@@ -1,0 +1,106 @@
+{% comment %}
+  Featured Collection Section - LO NUEVO | CAMISETAS EXCLUSIVAS
+{% endcomment %}
+
+<div class="featured-collection color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width">
+    {%- if section.settings.title != blank -%}
+      <h2 class="featured-collection__title h1">{{ section.settings.title }}</h2>
+    {%- endif -%}
+
+    {%- liquid
+      assign products_to_display = section.settings.products_to_show
+      assign collection = section.settings.collection
+    -%}
+
+    <div class="product-grid grid grid--4-col-desktop grid--2-col-tablet-down">
+      {%- if collection != blank -%}
+        {%- for product in collection.products limit: products_to_display -%}
+          {% render 'product-card', product: product %}
+        {%- endfor -%}
+      {%- else -%}
+        {%- for i in (1..products_to_display) -%}
+          {% render 'product-card-placeholder', index: i %}
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.show_view_all and collection != blank -%}
+      <div class="featured-collection__view-all center">
+        <a href="{{ collection.url }}" class="button button--primary">
+          {{ 'sections.featured_collection.view_all' | t }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Featured Collection",
+  "tag": "section",
+  "class": "section-featured-collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "default": "LO NUEVO | CAMISETAS EXCLUSIVAS",
+      "label": "Title"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 4,
+      "label": "Products to Show"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "default": true,
+      "label": "Show View All Button"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "background-1",
+      "label": "Color Scheme"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Collection"
+    }
+  ]
+}
+{% endschema %}
+
