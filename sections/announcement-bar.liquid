@@ -2,7 +2,7 @@
   Announcement Bar Section - Sticky promotional banner
 {% endcomment %}
 
-<div class="announcement-bar color-{{ section.settings.color_scheme }} gradient visible" role="region" aria-label="{{ 'sections.announcement_bar.label' | t }}" {{ block.shopify_attributes }}>
+<div class="announcement-bar color-{{ section.settings.color_scheme }} gradient visible" role="region" aria-label="{{ 'sections.announcement_bar.label' | t }}" {{ section.shopify_attributes }}>
   <div class="page-width" style="position: relative; min-height: 2rem;">
     {%- for block in section.blocks -%}
       {%- if block.settings.message != blank -%}
@@ -32,7 +32,7 @@
       "type": "text",
       "id": "message",
       "default": "¡ENVÍO GRATIS EN TODAS LAS COMPRAS! HASTA AGOTAR EXISTENCIAS.",
-      "label": "Default Announcement Message"
+      "label": "Default message"
     },
     {
       "type": "select",
@@ -60,13 +60,13 @@
         }
       ],
       "default": "accent-1",
-      "label": "Color Scheme"
+      "label": "Color scheme"
     }
   ],
   "blocks": [
     {
       "type": "message",
-      "name": "Promotional Message",
+      "name": "Message",
       "settings": [
         {
           "type": "text",

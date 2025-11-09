@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Product Card Hover Effects
   const productCards = document.querySelectorAll('.product-card');
-  productCards.forEach(card => {
+  for (const card of productCards) {
     card.addEventListener('mouseenter', function() {
       this.classList.add('is-hovered');
     });
@@ -42,10 +42,10 @@ document.addEventListener('DOMContentLoaded', function() {
     card.addEventListener('mouseleave', function() {
       this.classList.remove('is-hovered');
     });
-  });
+  }
 
   // Smooth Scroll for Anchor Links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  for (const anchor of document.querySelectorAll('a[href^="#"]')) {
     anchor.addEventListener('click', function (e) {
       const href = this.getAttribute('href');
       if (href !== '#' && href !== '') {
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       }
     });
-  });
+  }
 
   // Cart Count Update
   function updateCartCount() {
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
   updateCartCount();
 
   // Quick Add to Cart
-  document.querySelectorAll('.product-card__button, .featured-product__button').forEach(button => {
+  for (const button of document.querySelectorAll('.product-card__button, .featured-product__button')) {
     button.addEventListener('click', function(e) {
       e.preventDefault();
       const form = this.closest('form');
@@ -133,14 +133,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 3000);
       });
     });
-  });
+  }
 
   // Search functionality is now handled by the form in the header
 
   // Lazy Loading Images
   if ('IntersectionObserver' in window) {
     const imageObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
+      for (const entry of entries) {
         if (entry.isIntersecting) {
           const img = entry.target;
           if (img.dataset.src) {
@@ -149,12 +149,12 @@ document.addEventListener('DOMContentLoaded', function() {
             observer.unobserve(img);
           }
         }
-      });
+      }
     });
 
-    document.querySelectorAll('img[data-src]').forEach(img => {
+    for (const img of document.querySelectorAll('img[data-src]')) {
       imageObserver.observe(img);
-    });
+    }
   }
 
   // Rotating Promotional Messages (every 2 seconds) with swipe support
@@ -280,8 +280,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function showSlide(index) {
       // Remove active from all
-      heroSlides.forEach(slide => slide.classList.remove('active'));
-      heroDots.forEach(dot => dot.classList.remove('active'));
+      for (const slide of heroSlides) {
+        slide.classList.remove('active');
+      }
+      for (const dot of heroDots) {
+        dot.classList.remove('active');
+      }
       
       // Add active to target
       if (heroSlides[index]) {
@@ -313,14 +317,14 @@ document.addEventListener('DOMContentLoaded', function() {
     startHeroAutoplay();
     
     // Dot navigation with click events
-    heroDots.forEach((dot, index) => {
+    for (const [index, dot] of heroDots.entries()) {
       dot.addEventListener('click', (e) => {
         e.preventDefault();
         stopHeroAutoplay();
         showSlide(index);
         startHeroAutoplay();
       });
-    });
+    }
   }
 
   // Collection Banners Carousel (every 3 seconds)
@@ -330,7 +334,9 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentCollectionIndex = 0;
     
     function showCollectionGrid(index) {
-      collectionGrids.forEach(grid => grid.classList.remove('active'));
+      for (const grid of collectionGrids) {
+        grid.classList.remove('active');
+      }
       if (collectionGrids[index]) {
         collectionGrids[index].classList.add('active');
       }
@@ -356,7 +362,9 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentFeaturedIndex = 0;
     
     function showFeaturedSlide(index) {
-      featuredSlides.forEach(slide => slide.classList.remove('active'));
+      for (const slide of featuredSlides) {
+        slide.classList.remove('active');
+      }
       if (featuredSlides[index]) {
         featuredSlides[index].classList.add('active');
       }
@@ -435,7 +443,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Newsletter Form Validation
   const newsletterForms = document.querySelectorAll('.newsletter-form');
-  newsletterForms.forEach(form => {
+  for (const form of newsletterForms) {
     form.addEventListener('submit', function(e) {
       const emailInput = this.querySelector('input[type="email"]');
       if (emailInput && !emailInput.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
@@ -445,7 +453,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return false;
       }
     });
-  });
+  }
 });
 
 // Export for use in other scripts

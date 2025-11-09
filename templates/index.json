@@ -1,0 +1,27 @@
+{
+  "sections": {
+    "hero-banner": {
+      "type": "hero-banner"
+    },
+    "featured-collection": {
+      "type": "featured-collection"
+    },
+    "collection-banners": {
+      "type": "collection-banners"
+    },
+    "featured-product": {
+      "type": "featured-product"
+    },
+    "slogan-section": {
+      "type": "slogan-section"
+    }
+  },
+  "order": [
+    "hero-banner",
+    "featured-collection",
+    "collection-banners",
+    "featured-product",
+    "slogan-section"
+  ]
+}
+
