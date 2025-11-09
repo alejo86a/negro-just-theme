@@ -43,6 +43,11 @@
   "templates": {
     "cart": {
       "cart": "Carrito"
+    },
+    "404": {
+      "title": "Página no encontrada",
+      "subtext": "La página que buscas no existe.",
+      "back_to_home": "Volver al inicio"
     }
   },
   "customer": {

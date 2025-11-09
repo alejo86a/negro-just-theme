@@ -1633,3 +1633,47 @@ a:hover {
   color: var(--color-text);
 }
 
+/* 404 Page */
+.page-404 {
+  padding: 8rem 0;
+  text-align: center;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+}
+
+.page-404__content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.page-404__title {
+  margin-bottom: 1.5rem;
+  color: var(--color-text);
+}
+
+.page-404__subtext {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  color: var(--color-text);
+  opacity: 0.9;
+}
+
+.page-404__button {
+  margin-top: 1rem;
+}
+
+@media screen and (max-width: 750px) {
+  .page-404 {
+    padding: 4rem 0;
+  }
+  
+  .page-404__title {
+    font-size: 2rem;
+  }
+  
+  .page-404__subtext {
+    font-size: 1rem;
+  }
+}
+
