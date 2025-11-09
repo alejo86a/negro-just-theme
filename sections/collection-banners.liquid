@@ -5,11 +5,14 @@
 <div class="collection-banners color-{{ section.settings.color_scheme }} gradient">
   <div class="page-width">
     <div class="collection-banners__carousel">
-      {%- assign blocks_per_grid = 2 -%}
-      {%- assign grid_count = section.blocks.size | divided_by: blocks_per_grid -%}
-      {%- if section.blocks.size modulo blocks_per_grid > 0 -%}
-        {%- assign grid_count = grid_count | plus: 1 -%}
-      {%- endif -%}
+      {%- liquid
+        assign blocks_per_grid = 2
+        assign grid_count = section.blocks.size | divided_by: blocks_per_grid
+        assign remainder = section.blocks.size | modulo: blocks_per_grid
+        if remainder > 0
+          assign grid_count = grid_count | plus: 1
+        endif
+      -%}
       
       {%- for grid_index in (0..grid_count) -%}
         {%- assign start_index = grid_index | times: blocks_per_grid -%}
