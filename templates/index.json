@@ -15,20 +15,40 @@
         "slide_1": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/New_Project.png",
+            "heading": "FAMILIA, RIFA GRATIS DE UN SOLO GANADOR",
+            "text": "",
+            "button_label": "Participa aqui",
+            "button_link": "https://x.com/NegroJust/status/1986947529276043458"
+          }
+        },
+        "slide_NPyBTi": {
+          "type": "slide",
+          "settings": {
             "heading": "NUEVA COLECCIÓN",
-            "text": "<p>Descubre la pasión verdolaga</p>",
-            "button_label": "CONÓCELA AQUÍ"
+            "text": "<p>Descubre la pasión verdolaga con nuestra colección exclusiva</p>",
+            "button_label": "CONÓCELA AQUÍ",
+            "button_link": ""
           }
         }
       },
       "block_order": [
-        "slide_1"
+        "slide_1",
+        "slide_NPyBTi"
       ],
-      "settings": {}
+      "settings": {
+        "color_scheme": "background-1"
+      }
     },
     "featured-collection": {
       "type": "featured-collection",
-      "settings": {}
+      "settings": {
+        "title": "LO NUEVO | CAMISETAS EXCLUSIVAS",
+        "collection": "",
+        "products_to_show": 4,
+        "show_view_all": true,
+        "color_scheme": "background-1"
+      }
     },
     "collection-banners": {
       "type": "collection-banners",
@@ -36,13 +56,17 @@
         "banner_1": {
           "type": "banner",
           "settings": {
-            "heading": "BUSOS"
+            "collection": "",
+            "heading": "BUSOS",
+            "text": "Shop the collection"
           }
         },
         "banner_2": {
           "type": "banner",
           "settings": {
-            "heading": "GORRAS"
+            "collection": "",
+            "heading": "GORRAS",
+            "text": "Shop the collection"
           }
         }
       },
@@ -50,7 +74,9 @@
         "banner_1",
         "banner_2"
       ],
-      "settings": {}
+      "settings": {
+        "color_scheme": "background-1"
+      }
     },
     "featured-product": {
       "type": "featured-product",
@@ -61,18 +87,26 @@
             "media_text": "LOCAL 2025",
             "title": "EL EQUIPO OFICIAL",
             "product_title": "Camiseta ¡LOCAL 2025!",
-            "description": "La camiseta oficial del equipo verdolaga para la temporada 2025."
+            "description": "La camiseta oficial del equipo verdolaga para la temporada 2025.",
+            "price": "$99.99",
+            "button_label": "Agregar al Carrito",
+            "button_link": ""
           }
         }
       },
       "block_order": [
         "product_slide_1"
       ],
-      "settings": {}
+      "settings": {
+        "color_scheme": "background-1"
+      }
     },
     "slogan-section": {
       "type": "slogan-section",
-      "settings": {}
+      "settings": {
+        "slogan": "VERDE Y BLANCO: UNA PASIÓN DE DOS COLORES.",
+        "color_scheme": "background-1"
+      }
     }
   },
   "order": [
