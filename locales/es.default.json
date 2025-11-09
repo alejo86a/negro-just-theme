@@ -30,6 +30,9 @@
     },
     "featured_collection": {
       "view_all": "Ver Todo"
+    },
+    "footer": {
+      "copyright": "Todos los derechos reservados."
     }
   },
   "products": {
@@ -59,11 +62,6 @@
     "label": "Correo electrónico",
     "button_label": "Suscribirse",
     "success": "¡Gracias por suscribirte!"
-  },
-  "sections": {
-    "footer": {
-      "copyright": "Todos los derechos reservados."
-    }
   }
 }
 

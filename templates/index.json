@@ -1,16 +1,61 @@
 {
   "sections": {
     "hero-banner": {
-      "type": "hero-banner"
+      "type": "hero-banner",
+      "blocks": {
+        "slide_1": {
+          "type": "slide",
+          "settings": {
+            "heading": "NUEVA COLECCIÓN",
+            "text": "<p>Descubre la pasión verdolaga</p>",
+            "button_label": "CONÓCELA AQUÍ"
+          }
+        }
+      },
+      "block_order": [
+        "slide_1"
+      ]
     },
     "featured-collection": {
       "type": "featured-collection"
     },
     "collection-banners": {
-      "type": "collection-banners"
+      "type": "collection-banners",
+      "blocks": {
+        "banner_1": {
+          "type": "banner",
+          "settings": {
+            "heading": "BUSOS"
+          }
+        },
+        "banner_2": {
+          "type": "banner",
+          "settings": {
+            "heading": "GORRAS"
+          }
+        }
+      },
+      "block_order": [
+        "banner_1",
+        "banner_2"
+      ]
     },
     "featured-product": {
-      "type": "featured-product"
+      "type": "featured-product",
+      "blocks": {
+        "product_slide_1": {
+          "type": "product_slide",
+          "settings": {
+            "media_text": "LOCAL 2025",
+            "title": "EL EQUIPO OFICIAL",
+            "product_title": "Camiseta ¡LOCAL 2025!",
+            "description": "La camiseta oficial del equipo verdolaga para la temporada 2025."
+          }
+        }
+      },
+      "block_order": [
+        "product_slide_1"
+      ]
     },
     "slogan-section": {
       "type": "slogan-section"
