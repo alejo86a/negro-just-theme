@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "general": {
     "meta": {
@@ -6,7 +15,8 @@
     },
     "common": {
       "search": "Buscar"
-    }
+    },
+    "back_to_top": "Volver arriba"
   },
   "accessibility": {
     "skip_to_text": "Ir al contenido",
@@ -29,7 +39,10 @@
       "cart_quantity_error_html": "Solo puedes agregar {{ quantity }} de este artículo a tu carrito."
     },
     "featured_collection": {
-      "view_all": "Ver Todo"
+      "view_all": "Ver todo"
+    },
+    "slogan": {
+      "default": "Verde y blanco: una pasión de dos colores."
     },
     "footer": {
       "copyright": "Todos los derechos reservados."
@@ -37,20 +50,15 @@
   },
   "products": {
     "product": {
-      "add_to_cart": "Agregar al Carrito",
+      "add_to_cart": "Agregar al carrito",
       "sold_out": "Agotado",
-      "unavailable": "No Disponible",
+      "unavailable": "No disponible",
       "title": "Producto"
     }
   },
   "templates": {
     "cart": {
       "cart": "Carrito"
-    },
-    "404": {
-      "title": "Página no encontrada",
-      "subtext": "La página que buscas no existe.",
-      "back_to_home": "Volver al inicio"
     }
   },
   "customer": {
