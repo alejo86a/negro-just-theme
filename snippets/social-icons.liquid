@@ -43,5 +43,15 @@
       </a>
     </li>
   {%- endif -%}
+  {%- if settings.social_tiktok_link != blank -%}
+    <li class="list-social__item">
+      <a href="{{ settings.social_tiktok_link }}" class="link list-social__link">
+        <svg class="icon icon-tiktok" aria-hidden="true" focusable="false" role="presentation">
+          <use href="#icon-tiktok"></use>
+        </svg>
+        <span class="visually-hidden">TikTok</span>
+      </a>
+    </li>
+  {%- endif -%}
 </ul>
 

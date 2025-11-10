@@ -1278,6 +1278,10 @@ a:hover {
   letter-spacing: 1px;
 }
 
+.footer-block__contact-heading {
+  margin-top: 2rem;
+}
+
 .footer-block__details-content {
   list-style: none;
   padding: 0;

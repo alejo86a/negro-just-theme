@@ -33,13 +33,36 @@
                   {%- endfor -%}
                 </ul>
               {%- endif -%}
+              {%- if block.settings.show_contact -%}
+                <h2 class="footer-block__heading h4 footer-block__contact-heading">{{ block.settings.contact_heading | default: 'CONTACTO' }}</h2>
+                <div class="footer-block__details-content">
+                  {%- if block.settings.contact_email != blank -%}
+                    <p class="footer-block__contact-info">
+                      <strong>E-Mail:</strong> <a href="mailto:{{ block.settings.contact_email }}">{{ block.settings.contact_email }}</a>
+                    </p>
+                  {%- endif -%}
+                  {%- if block.settings.contact_phone != blank -%}
+                    <p class="footer-block__contact-info">{{ block.settings.contact_phone }}</p>
+                  {%- endif -%}
+                  {%- if block.settings.contact_whatsapp != blank -%}
+                    <p class="footer-block__contact-info">
+                      <strong>WhatsApp:</strong> {{ block.settings.contact_whatsapp }}
+                    </p>
+                  {%- endif -%}
+                  {%- if block.settings.contact_hours != blank -%}
+                    <p class="footer-block__contact-info">{{ block.settings.contact_hours }}</p>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
             {%- when 'text' -%}
               <h2 class="footer-block__heading h4">{{ block.settings.heading }}</h2>
               <div class="footer-block__details-content rte">
                 {{ block.settings.subtext }}
               </div>
             {%- when 'newsletter' -%}
-              <h2 class="footer-block__heading h4">{{ block.settings.heading }}</h2>
+              {%- if block.settings.heading != blank -%}
+                <h2 class="footer-block__heading h4">{{ block.settings.heading }}</h2>
+              {%- endif -%}
               {%- if block.settings.text != blank -%}
                 <p class="footer-block__text">{{ block.settings.text }}</p>
               {%- endif -%}
@@ -93,6 +116,28 @@
                   {{ block.settings.address_link_text | default: 'Ver en mapa' }}
                 </a>
               {%- endif -%}
+            {%- when 'contact' -%}
+              {%- if block.settings.heading != blank -%}
+                <h2 class="footer-block__heading h4">{{ block.settings.heading }}</h2>
+              {%- endif -%}
+              <div class="footer-block__details-content">
+                {%- if block.settings.email != blank -%}
+                  <p class="footer-block__contact-info">
+                    <strong>E-Mail:</strong> <a href="mailto:{{ block.settings.email }}">{{ block.settings.email }}</a>
+                  </p>
+                {%- endif -%}
+                {%- if block.settings.phone != blank -%}
+                  <p class="footer-block__contact-info">{{ block.settings.phone }}</p>
+                {%- endif -%}
+                {%- if block.settings.whatsapp != blank -%}
+                  <p class="footer-block__contact-info">
+                    <strong>WhatsApp:</strong> {{ block.settings.whatsapp }}
+                  </p>
+                {%- endif -%}
+                {%- if block.settings.hours != blank -%}
+                  <p class="footer-block__contact-info">{{ block.settings.hours }}</p>
+                {%- endif -%}
+              </div>
           {%- endcase -%}
         </div>
       {%- endfor -%}
@@ -133,6 +178,42 @@
           "default": "footer",
           "label": "Menu",
           "info": "Select a menu to display"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_contact",
+          "default": false,
+          "label": "Show contact information"
+        },
+        {
+          "type": "text",
+          "id": "contact_heading",
+          "default": "CONTACTO",
+          "label": "Contact heading"
+        },
+        {
+          "type": "text",
+          "id": "contact_email",
+          "default": "hola@negrojust.com",
+          "label": "Contact email"
+        },
+        {
+          "type": "text",
+          "id": "contact_phone",
+          "default": "01 8000 423 582",
+          "label": "Contact phone"
+        },
+        {
+          "type": "text",
+          "id": "contact_whatsapp",
+          "default": "333 636 6669",
+          "label": "Contact WhatsApp"
+        },
+        {
+          "type": "text",
+          "id": "contact_hours",
+          "default": "Lunes A Viernes De 8:00am A 5:00pm",
+          "label": "Business hours"
         }
       ]
     },
@@ -161,14 +242,50 @@
         {
           "type": "text",
           "id": "heading",
-          "default": "Newsletter",
+          "default": "¡SUSCRÍBETE A NUESTRO NEWSLETTER!",
           "label": "Heading"
         },
         {
           "type": "text",
           "id": "text",
-          "default": "Suscríbete para recibir las últimas novedades",
+          "default": "¡Suscríbete al mundo verdolaga y conoce todas las ofertas y noticias que tenemos para ti!",
           "label": "Text"
+        }
+      ]
+    },
+    {
+      "type": "contact",
+      "name": "Contact",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "CONTACTO",
+          "label": "Heading"
+        },
+        {
+          "type": "text",
+          "id": "email",
+          "default": "hola@negrojust.com",
+          "label": "Email"
+        },
+        {
+          "type": "text",
+          "id": "phone",
+          "default": "01 8000 423 582",
+          "label": "Phone"
+        },
+        {
+          "type": "text",
+          "id": "whatsapp",
+          "default": "333 636 6669",
+          "label": "WhatsApp"
+        },
+        {
+          "type": "text",
+          "id": "hours",
+          "default": "Lunes A Viernes De 8:00am A 5:00pm",
+          "label": "Business Hours"
         }
       ]
     },
