@@ -456,6 +456,184 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
+  // Product Page Functionality
+  const productSection = document.querySelector('.product');
+  if (productSection) {
+    // Product Media Gallery
+    const productThumbnails = productSection.querySelectorAll('.product__media-thumbnail');
+    const productMediaItems = productSection.querySelectorAll('.product__media-item');
+    
+    for (const thumbnail of productThumbnails) {
+      thumbnail.addEventListener('click', function() {
+        const mediaId = this.dataset.mediaId;
+        
+        // Remove active from all
+        for (const thumb of productThumbnails) {
+          thumb.classList.remove('active');
+        }
+        for (const item of productMediaItems) {
+          item.classList.remove('active');
+        }
+        
+        // Add active to selected
+        this.classList.add('active');
+        const targetMedia = productSection.querySelector(`[data-media-id="${mediaId}"]`);
+        if (targetMedia) {
+          targetMedia.classList.add('active');
+        }
+      });
+    }
+
+    // Variant Selection
+    const variantSelects = productSection.querySelectorAll('.select__select');
+    const productForm = productSection.querySelector('form[data-type="add-to-cart-form"]');
+    
+    if (variantSelects.length > 0 && productForm) {
+      for (const select of variantSelects) {
+        select.addEventListener('change', function() {
+          updateVariant();
+        });
+      }
+    }
+
+    function updateVariant() {
+      const formData = new FormData(productForm);
+      const selectedOptions = {};
+      
+      for (const select of variantSelects) {
+        const optionName = select.name.replace('options[', '').replace(']', '');
+        selectedOptions[optionName] = select.value;
+      }
+
+      // Find matching variant
+      const productData = JSON.parse(document.querySelector('[data-product-json]')?.textContent || '{}');
+      if (productData.variants) {
+        const matchingVariant = productData.variants.find(variant => {
+          return variant.options.every((option, index) => {
+            const optionName = productData.options[index];
+            return selectedOptions[optionName] === option;
+          });
+        });
+
+        if (matchingVariant) {
+          // Update hidden input
+          const variantInput = productForm.querySelector('input[name="id"]');
+          if (variantInput) {
+            variantInput.value = matchingVariant.id;
+          }
+
+          // Update price
+          const priceElement = productSection.querySelector('.product__price');
+          if (priceElement && matchingVariant.price) {
+            const price = matchingVariant.price;
+            const comparePrice = matchingVariant.compare_at_price;
+            
+            if (comparePrice && comparePrice > price) {
+              const priceFormatted = (price / 100).toLocaleString('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 });
+              const comparePriceFormatted = (comparePrice / 100).toLocaleString('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 });
+              priceElement.innerHTML = `<span class="product__price--sale">${priceFormatted}</span> <span class="product__price--compare">${comparePriceFormatted}</span>`;
+            } else {
+              const priceFormatted = (price / 100).toLocaleString('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 });
+              priceElement.textContent = priceFormatted;
+            }
+          }
+
+          // Update availability
+          const submitButton = productForm.querySelector('.product-form__submit');
+          if (submitButton) {
+            if (matchingVariant.available) {
+              submitButton.disabled = false;
+              submitButton.querySelector('span').textContent = 'Agregar al Carrito';
+            } else {
+              submitButton.disabled = true;
+              submitButton.querySelector('span').textContent = 'Agotado';
+            }
+          }
+
+          // Update featured media if variant has different image
+          if (matchingVariant.featured_media) {
+            const sectionId = productSection.dataset.sectionId;
+            const newMediaId = `${sectionId}-${matchingVariant.featured_media.id}`;
+            const newMediaItem = productSection.querySelector(`[data-media-id="${newMediaId}"]`);
+            if (newMediaItem) {
+              for (const item of productMediaItems) {
+                item.classList.remove('active');
+              }
+              newMediaItem.classList.add('active');
+              
+              // Update thumbnail
+              for (const thumb of productThumbnails) {
+                thumb.classList.remove('active');
+              }
+              const thumbnailButton = Array.from(productThumbnails).find(thumb => thumb.dataset.mediaId === newMediaId);
+              if (thumbnailButton) {
+                thumbnailButton.classList.add('active');
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // Quantity Input
+    const quantityInput = productSection.querySelector('.quantity__input');
+    const quantityButtons = productSection.querySelectorAll('.quantity__button');
+    
+    if (quantityInput) {
+      for (const button of quantityButtons) {
+        button.addEventListener('click', function() {
+          const currentValue = parseInt(quantityInput.value) || 1;
+          if (this.name === 'plus') {
+            quantityInput.value = currentValue + 1;
+          } else if (this.name === 'minus' && currentValue > 1) {
+            quantityInput.value = currentValue - 1;
+          }
+        });
+      }
+    }
+
+    // Product Form Submission
+    if (productForm) {
+      productForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+        const submitButton = this.querySelector('.product-form__submit');
+        const originalText = submitButton.querySelector('span').textContent;
+        
+        submitButton.disabled = true;
+        submitButton.querySelector('span').textContent = 'Agregando...';
+
+        fetch(window.routes.cart_add_url, {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.items) {
+            submitButton.querySelector('span').textContent = '¡Agregado!';
+            updateCartCount();
+            
+            setTimeout(() => {
+              submitButton.disabled = false;
+              submitButton.querySelector('span').textContent = originalText;
+            }, 2000);
+          } else {
+            throw new Error('Failed to add to cart');
+          }
+        })
+        .catch(error => {
+          console.error('Error adding to cart:', error);
+          submitButton.disabled = false;
+          submitButton.querySelector('span').textContent = 'Error. Intenta de nuevo.';
+          setTimeout(() => {
+            submitButton.querySelector('span').textContent = originalText;
+          }, 3000);
+        });
+      });
+    }
+  }
+
 // Export for use in other scripts
 window.NegroJustTheme = {
   updateCartCount: function() {

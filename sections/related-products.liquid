@@ -1,0 +1,85 @@
+{% comment %}
+  Related Products Section
+{% endcomment %}
+
+{%- liquid
+  assign products_to_display = section.settings.products_to_show
+  assign collection = product.collections.first
+-%}
+
+{%- if collection != blank and collection.products_count > 1 -%}
+  <div class="related-products color-{{ section.settings.color_scheme }} gradient">
+    <div class="page-width">
+      {%- if section.settings.title != blank -%}
+        <h2 class="related-products__title h1">{{ section.settings.title }}</h2>
+      {%- endif -%}
+
+      <div class="product-grid grid grid--4-col-desktop grid--2-col-tablet-down">
+        {%- for related_product in collection.products limit: products_to_display -%}
+          {%- unless related_product.handle == product.handle -%}
+            {% render 'product-card', product: related_product %}
+          {%- endunless -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Related Products",
+  "tag": "section",
+  "class": "section-related-products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "default": "Productos Relacionados",
+      "label": "Title"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 4,
+      "label": "Products to show"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "background-1",
+      "label": "Color scheme"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Related Products"
+    }
+  ]
+}
+{% endschema %}
+

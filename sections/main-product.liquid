@@ -1,0 +1,254 @@
+{% comment %}
+  Main Product Section
+{% endcomment %}
+
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign product_image_zoom_size = '1024x1024'
+  assign product_image_scale = '2'
+-%}
+
+<script type="application/json" data-product-json>
+  {{ product | json }}
+</script>
+
+<div class="product color-{{ section.settings.color_scheme }} gradient" id="ProductSection-{{ section.id }}" data-section-id="{{ section.id }}">
+  <div class="page-width">
+    <div class="product__container grid grid--2-col">
+      {%- comment -%} Product Media {%- endcomment -%}
+      <div class="product__media-wrapper">
+        <div class="product__media">
+          {%- if product.selected_or_first_available_variant.featured_media != null -%}
+            {%- assign featured_media = product.selected_or_first_available_variant.featured_media -%}
+            <div class="product__media-item product__media-item--featured">
+              <img
+                srcset="{%- if featured_media.width >= 165 -%}{{ featured_media | image_url: width: 165 }} 165w,{%- endif -%}
+                        {%- if featured_media.width >= 360 -%}{{ featured_media | image_url: width: 360 }} 360w,{%- endif -%}
+                        {%- if featured_media.width >= 533 -%}{{ featured_media | image_url: width: 533 }} 533w,{%- endif -%}
+                        {%- if featured_media.width >= 720 -%}{{ featured_media | image_url: width: 720 }} 720w,{%- endif -%}
+                        {%- if featured_media.width >= 940 -%}{{ featured_media | image_url: width: 940 }} 940w,{%- endif -%}
+                        {%- if featured_media.width >= 1066 -%}{{ featured_media | image_url: width: 1066 }} 1066w,{%- endif -%}
+                        {{ featured_media | image_url }} {{ featured_media.width }}w"
+                src="{{ featured_media | image_url: width: 533 }}"
+                sizes="(min-width: 990px) 50vw, 100vw"
+                alt="{{ featured_media.alt | escape }}"
+                class="product__media-image"
+                loading="eager"
+                width="{{ featured_media.width }}"
+                height="{{ featured_media.height }}"
+                id="FeaturedMedia-{{ section.id }}"
+              >
+            </div>
+          {%- endif -%}
+
+          {%- for media in product.media -%}
+            {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
+              <div class="product__media-item" data-media-id="{{ section.id }}-{{ media.id }}">
+                {%- case media.media_type -%}
+                  {%- when 'image' -%}
+                    <img
+                      srcset="{%- if media.width >= 165 -%}{{ media | image_url: width: 165 }} 165w,{%- endif -%}
+                              {%- if media.width >= 360 -%}{{ media | image_url: width: 360 }} 360w,{%- endif -%}
+                              {%- if media.width >= 533 -%}{{ media | image_url: width: 533 }} 533w,{%- endif -%}
+                              {%- if media.width >= 720 -%}{{ media | image_url: width: 720 }} 720w,{%- endif -%}
+                              {%- if media.width >= 940 -%}{{ media | image_url: width: 940 }} 940w,{%- endif -%}
+                              {%- if media.width >= 1066 -%}{{ media | image_url: width: 1066 }} 1066w,{%- endif -%}
+                              {{ media | image_url }} {{ media.width }}w"
+                      src="{{ media | image_url: width: 533 }}"
+                      sizes="(min-width: 990px) 50vw, 100vw"
+                      alt="{{ media.alt | escape }}"
+                      class="product__media-image"
+                      loading="lazy"
+                      width="{{ media.width }}"
+                      height="{{ media.height }}"
+                    >
+                  {%- when 'video' -%}
+                    {{ media | video_tag: image_size: '1024x1024', controls: true, loop: section.settings.enable_video_looping, id: section.id }}
+                  {%- when 'model' -%}
+                    {{ media | model_viewer_tag: image_size: '1024x1024', toggleable: true, id: section.id }}
+                {%- endcase -%}
+              </div>
+            {%- endunless -%}
+          {%- endfor -%}
+        </div>
+
+        {%- if product.media.size > 1 -%}
+          <div class="product__media-thumbnails">
+            {%- for media in product.media -%}
+              <button
+                type="button"
+                class="product__media-thumbnail"
+                aria-label="{{ 'products.product.media.load_image' | t: index: forloop.index }}"
+                data-media-id="{{ section.id }}-{{ media.id }}"
+              >
+                <img
+                  srcset="{%- if media.width >= 165 -%}{{ media | image_url: width: 165 }} 165w,{%- endif -%}
+                          {%- if media.width >= 200 -%}{{ media | image_url: width: 200 }} 200w,{%- endif -%}
+                          {{ media | image_url }} {{ media.width }}w"
+                  src="{{ media | image_url: width: 200 }}"
+                  alt="{{ media.alt | escape }}"
+                  loading="lazy"
+                  width="{{ media.width }}"
+                  height="{{ media.height }}"
+                >
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} Product Info {%- endcomment -%}
+      <div class="product__info-wrapper">
+        <div id="ProductInfo-{{ section.id }}">
+          <h1 class="product__title h1">
+            {{ product.title | escape }}
+          </h1>
+
+          <div class="product__price">
+            {%- if current_variant.compare_at_price > current_variant.price -%}
+              <span class="product__price--sale">{{ current_variant.price | money }}</span>
+              <span class="product__price--compare">{{ current_variant.compare_at_price | money }}</span>
+            {%- else -%}
+              {{ current_variant.price | money }}
+            {%- endif -%}
+          </div>
+
+          {%- if product.description != blank -%}
+            <div class="product__description rte">
+              {{ product.description }}
+            </div>
+          {%- endif -%}
+
+          {%- form 'product', product, id: 'product-form-installment', class: 'installment' -%}
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+            {{ form | payment_terms }}
+          {%- endform -%}
+
+          <product-form class="product-form">
+            {%- form 'product', product, id: 'product-form', class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+              <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+              {%- unless product.has_only_default_variant -%}
+                <div class="product-form__variants">
+                  {%- for option in product.options_with_values -%}
+                    <div class="product-form__input product-form__input--dropdown">
+                      <label class="form__label" for="Option-{{ section.id }}-{{ forloop.index0 }}">
+                        {{ option.name }}
+                      </label>
+                      <div class="select">
+                        <select
+                          id="Option-{{ section.id }}-{{ forloop.index0 }}"
+                          class="select__select"
+                          name="options[{{ option.name | escape }}]"
+                          form="product-form"
+                        >
+                          {%- for value in option.values -%}
+                            <option value="{{ value | escape }}" {% if option.selected_value == value %}selected="selected"{% endif %}>
+                              {{ value }}
+                            </option>
+                          {%- endfor -%}
+                        </select>
+                      </div>
+                    </div>
+                  {%- endfor -%}
+                </div>
+              {%- endunless -%}
+
+              <div class="product-form__quantity">
+                <label class="form__label" for="Quantity-{{ section.id }}">
+                  {{ 'products.product.quantity.label' | t }}
+                </label>
+                <quantity-input class="quantity">
+                  <button class="quantity__button" name="minus" type="button">
+                    <span class="visually-hidden">{{ 'products.product.quantity.decrease' | t: product: product.title | escape }}</span>
+                    -
+                  </button>
+                  <input
+                    class="quantity__input"
+                    type="number"
+                    name="quantity"
+                    id="Quantity-{{ section.id }}"
+                    min="1"
+                    value="1"
+                    form="product-form"
+                  >
+                  <button class="quantity__button" name="plus" type="button">
+                    <span class="visually-hidden">{{ 'products.product.quantity.increase' | t: product: product.title | escape }}</span>
+                    +
+                  </button>
+                </quantity-input>
+              </div>
+
+              <div class="product-form__buttons">
+                <button
+                  type="submit"
+                  name="add"
+                  class="product-form__submit button button--primary"
+                  {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
+                >
+                  <span>
+                    {%- if product.selected_or_first_available_variant.available -%}
+                      {{ 'products.product.add_to_cart' | t }}
+                    {%- else -%}
+                      {{ 'products.product.sold_out' | t }}
+                    {%- endif -%}
+                  </span>
+                </button>
+              </div>
+            {%- endform -%}
+          </product-form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product",
+  "tag": "section",
+  "class": "section-main-product",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_video_looping",
+      "default": false,
+      "label": "Enable video looping"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "background-1",
+      "label": "Color scheme"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product"
+    }
+  ]
+}
+{% endschema %}
+
