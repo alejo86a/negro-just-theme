@@ -463,6 +463,35 @@ document.addEventListener('DOMContentLoaded', function() {
     const productThumbnails = productSection.querySelectorAll('.product__media-thumbnail');
     const productMediaItems = productSection.querySelectorAll('.product__media-item');
     
+    // Initialize: Set first thumbnail and media item as active if not already set
+    if (productThumbnails.length > 0 && productMediaItems.length > 0) {
+      const activeThumbnail = productSection.querySelector('.product__media-thumbnail.active');
+      const activeMediaItem = productSection.querySelector('.product__media-item.active');
+      
+      // If no active thumbnail, set the first one
+      if (!activeThumbnail && productThumbnails[0]) {
+        productThumbnails[0].classList.add('active');
+      }
+      
+      // If no active media item, set the first one
+      if (!activeMediaItem && productMediaItems[0]) {
+        productMediaItems[0].classList.add('active');
+      }
+      
+      // Ensure the active thumbnail matches the active media item
+      const currentActiveMedia = productSection.querySelector('.product__media-item.active');
+      if (currentActiveMedia) {
+        const activeMediaId = currentActiveMedia.dataset.mediaId;
+        for (const thumb of productThumbnails) {
+          if (thumb.dataset.mediaId === activeMediaId) {
+            thumb.classList.add('active');
+          } else {
+            thumb.classList.remove('active');
+          }
+        }
+      }
+    }
+    
     for (const thumbnail of productThumbnails) {
       thumbnail.addEventListener('click', function() {
         const mediaId = this.dataset.mediaId;

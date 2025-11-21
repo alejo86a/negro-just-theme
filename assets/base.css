@@ -1711,6 +1711,10 @@ a:hover {
   display: block;
 }
 
+.product__media-item--featured.active {
+  display: block;
+}
+
 .product__media-image {
   width: 100%;
   height: auto;
@@ -1784,6 +1788,23 @@ a:hover {
   color: var(--color-text);
   margin-bottom: 2rem;
   line-height: 1.8;
+  font-size: 1rem;
+  overflow: visible;
+  word-wrap: break-word;
+}
+
+.product__description.rte {
+  color: var(--color-text);
+}
+
+.product__description.rte p {
+  color: var(--color-text);
+  margin-bottom: 1rem;
+}
+
+.product__description.rte a {
+  color: var(--color-accent);
+  text-decoration: underline;
 }
 
 .product-form {
@@ -1880,6 +1901,7 @@ a:hover {
   color: var(--color-text);
   font-family: var(--font-body);
   font-size: 1rem;
+  appearance: textfield;
   -moz-appearance: textfield;
 }
 
