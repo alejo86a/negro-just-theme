@@ -47,7 +47,8 @@
   "products": {
     "product": {
       "add_to_cart": "Add to Cart",
-      "sold_out": "Sold Out",
+      "sale": "SALE",
+      "sold_out": "SOLD OUT",
       "unavailable": "Unavailable",
       "title": "Product",
       "quantity": {
@@ -58,6 +59,37 @@
       "media": {
         "load_image": "Load image {{ index }}"
       }
+    }
+  },
+  "collections": {
+    "filters": {
+      "filter_and_sort": "Filter & Sort",
+      "filter_by": "FILTER BY",
+      "close": "Close",
+      "availability": "Availability",
+      "in_stock": "In Stock",
+      "out_of_stock": "Out of Stock",
+      "price": "Price",
+      "under_50": "Under $50",
+      "50_to_100": "$50 - $100",
+      "over_100": "Over $100",
+      "clear_all": "Clear All"
+    },
+    "sorting": {
+      "title": "Sort by",
+      "featured": "Featured",
+      "best_selling": "Best Selling",
+      "az": "Alphabetically, A-Z",
+      "za": "Alphabetically, Z-A",
+      "price_ascending": "Price, low to high",
+      "price_descending": "Price, high to low",
+      "date_ascending": "Date, old to new",
+      "date_descending": "Date, new to old"
+    },
+    "load_more": "LOAD MORE",
+    "empty": {
+      "message": "No products here yet.",
+      "back_to_home": "Back to Home"
     }
   },
   "templates": {

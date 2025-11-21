@@ -748,6 +748,136 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
   }
+
+  // Collection Page Functionality
+  const collectionPage = document.querySelector('.collection-page');
+  if (collectionPage) {
+    // Mobile Filter Toggle
+    const filterTrigger = collectionPage.querySelector('[data-filter-trigger]');
+    const filterClose = collectionPage.querySelector('[data-filter-close]');
+    const filters = collectionPage.querySelector('[data-filters]');
+    const filterOverlay = document.createElement('div');
+    filterOverlay.className = 'collection-filters__overlay';
+    filterOverlay.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 999; display: none;';
+    
+    if (filterTrigger && filters) {
+      filterTrigger.addEventListener('click', function() {
+        filters.classList.add('active');
+        filterOverlay.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+        if (!document.body.contains(filterOverlay)) {
+          document.body.appendChild(filterOverlay);
+        }
+      });
+
+      const closeFilters = () => {
+        filters.classList.remove('active');
+        filterOverlay.style.display = 'none';
+        document.body.style.overflow = '';
+      };
+
+      if (filterClose) {
+        filterClose.addEventListener('click', closeFilters);
+      }
+
+      filterOverlay.addEventListener('click', closeFilters);
+    }
+
+    // Accordion Functionality
+    const accordionTriggers = collectionPage.querySelectorAll('[data-accordion-trigger]');
+    for (const trigger of accordionTriggers) {
+      trigger.addEventListener('click', function() {
+        const isExpanded = this.getAttribute('aria-expanded') === 'true';
+        const content = this.nextElementSibling;
+        
+        if (isExpanded) {
+          this.setAttribute('aria-expanded', 'false');
+          if (content) {
+            content.style.display = 'none';
+          }
+        } else {
+          this.setAttribute('aria-expanded', 'true');
+          if (content) {
+            content.style.display = 'flex';
+          }
+        }
+      });
+    }
+
+    // Load More Functionality
+    const loadMoreButton = collectionPage.querySelector('[data-load-more]');
+    const productGrid = collectionPage.querySelector('[data-product-grid]');
+    
+    if (loadMoreButton && productGrid) {
+      loadMoreButton.addEventListener('click', function() {
+        const nextPageUrl = this.dataset.nextPage;
+        if (!nextPageUrl) {
+          this.style.display = 'none';
+          return;
+        }
+
+        const originalText = this.textContent;
+        this.disabled = true;
+        this.textContent = 'Cargando...';
+
+        fetch(nextPageUrl)
+          .then(response => response.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const newProducts = doc.querySelector('[data-product-grid]');
+            const newLoadMore = doc.querySelector('[data-load-more]');
+
+            if (newProducts) {
+              const products = newProducts.querySelectorAll('.product-card');
+              for (const product of products) {
+                productGrid.appendChild(product);
+              }
+            }
+
+            if (newLoadMore && newLoadMore.dataset.nextPage) {
+              this.dataset.nextPage = newLoadMore.dataset.nextPage;
+              this.disabled = false;
+              this.textContent = originalText;
+            } else {
+              this.style.display = 'none';
+            }
+          })
+          .catch(error => {
+            console.error('Error loading more products:', error);
+            this.disabled = false;
+            this.textContent = originalText;
+          });
+      });
+    }
+
+    // Filter Functionality (Basic - can be enhanced)
+    const filterForm = collectionPage.querySelector('[data-filter-form]');
+    const filterCheckboxes = collectionPage.querySelectorAll('[data-filter-checkbox]');
+    const sortSelect = collectionPage.querySelector('[data-sort-select]');
+    const clearFilters = collectionPage.querySelector('[data-filter-clear]');
+
+    if (sortSelect) {
+      sortSelect.addEventListener('change', function() {
+        const url = new URL(window.location);
+        url.searchParams.set('sort_by', this.value);
+        window.location.href = url.toString();
+      });
+    }
+
+    if (clearFilters) {
+      clearFilters.addEventListener('click', function() {
+        for (const checkbox of filterCheckboxes) {
+          checkbox.checked = false;
+        }
+        if (sortSelect) {
+          sortSelect.value = 'manual';
+        }
+        // Reload page without filters
+        window.location.href = window.location.pathname;
+      });
+    }
+  }
 });
 
 // Export for use in other scripts

@@ -51,7 +51,8 @@
   "products": {
     "product": {
       "add_to_cart": "Agregar al carrito",
-      "sold_out": "Agotado",
+      "sale": "OFERTA",
+      "sold_out": "AGOTADO",
       "unavailable": "No disponible",
       "title": "Producto",
       "quantity": {
@@ -62,6 +63,37 @@
       "media": {
         "load_image": "Cargar imagen {{ index }}"
       }
+    }
+  },
+  "collections": {
+    "filters": {
+      "filter_and_sort": "Filtrar y Ordenar",
+      "filter_by": "FILTRAR POR",
+      "close": "Cerrar",
+      "availability": "Disponibilidad",
+      "in_stock": "En stock",
+      "out_of_stock": "Agotado",
+      "price": "Precio",
+      "under_50": "Menos de $50",
+      "50_to_100": "$50 - $100",
+      "over_100": "Más de $100",
+      "clear_all": "Limpiar todo"
+    },
+    "sorting": {
+      "title": "Ordenar por",
+      "featured": "Destacados",
+      "best_selling": "Más vendidos",
+      "az": "Alfabético, A-Z",
+      "za": "Alfabético, Z-A",
+      "price_ascending": "Precio, menor a mayor",
+      "price_descending": "Precio, mayor a menor",
+      "date_ascending": "Fecha, antiguo a nuevo",
+      "date_descending": "Fecha, nuevo a antiguo"
+    },
+    "load_more": "CARGAR MÁS",
+    "empty": {
+      "message": "Aún no hay productos aquí, Verdolaga.",
+      "back_to_home": "Volver al Inicio"
     }
   },
   "templates": {
