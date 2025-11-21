@@ -49,7 +49,15 @@
       "add_to_cart": "Add to Cart",
       "sold_out": "Sold Out",
       "unavailable": "Unavailable",
-      "title": "Product"
+      "title": "Product",
+      "quantity": {
+        "label": "Quantity",
+        "increase": "Increase quantity of {{ product }}",
+        "decrease": "Decrease quantity of {{ product }}"
+      },
+      "media": {
+        "load_image": "Load image {{ index }}"
+      }
     }
   },
   "templates": {

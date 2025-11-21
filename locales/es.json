@@ -52,11 +52,7 @@
     "product": {
       "add_to_cart": "Agregar al carrito",
       "sold_out": "Agotado",
-<<<<<<< HEAD:locales/es.json
       "unavailable": "No disponible",
-      "title": "Producto"
-=======
-      "unavailable": "No Disponible",
       "title": "Producto",
       "quantity": {
         "label": "Cantidad",
@@ -66,7 +62,6 @@
       "media": {
         "load_image": "Cargar imagen {{ index }}"
       }
->>>>>>> a2d64b3 (add producti section):locales/es.default.json
     }
   },
   "templates": {

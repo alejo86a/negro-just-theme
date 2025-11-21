@@ -178,8 +178,10 @@
           </div>
 
           {%- if product.description != blank -%}
-            <div class="product__description rte">
-              {{ product.description }}
+            <div class="product-description-container" data-product-description>
+              <div class="product__description-content rte">
+                {{ product.description }}
+              </div>
             </div>
           {%- endif -%}
 

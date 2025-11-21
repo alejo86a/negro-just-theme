@@ -453,12 +453,98 @@ document.addEventListener('DOMContentLoaded', function() {
         return false;
       }
     });
-  }
-});
 
   // Product Page Functionality
   const productSection = document.querySelector('.product');
   if (productSection) {
+    // Product Description Enhancement
+    const descriptionContainer = productSection.querySelector('[data-product-description]');
+    if (descriptionContainer) {
+      const descriptionContent = descriptionContainer.querySelector('.product__description-content');
+      if (descriptionContent) {
+        const html = descriptionContent.innerHTML;
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = html;
+        
+        // Find first paragraph for intro
+        const firstP = tempDiv.querySelector('p:first-of-type');
+        let introText = '';
+        let featureList = null;
+        
+        if (firstP) {
+          introText = firstP.outerHTML;
+          firstP.remove();
+        }
+        
+        // Find list (ul or ol) and convert to our styled list
+        const list = tempDiv.querySelector('ul, ol');
+        if (list) {
+          // Convert existing list to our styled format
+          const listItems = list.querySelectorAll('li');
+          featureList = '<ul class="product__description-features">';
+          for (const item of listItems) {
+            const text = item.textContent.trim();
+            if (text.includes(':')) {
+              const colonIndex = text.indexOf(':');
+              const label = text.substring(0, colonIndex).trim();
+              const value = text.substring(colonIndex + 1).trim();
+              featureList += `<li><strong>${label}:</strong> ${value}</li>`;
+            } else {
+              featureList += `<li>${text}</li>`;
+            }
+          }
+          featureList += '</ul>';
+          list.remove();
+        }
+        
+        // If no list but has colons, create list from lines
+        if (!featureList && tempDiv.textContent.includes(':')) {
+          const lines = tempDiv.textContent.split('\n').filter(line => line.trim() && line.includes(':'));
+          if (lines.length > 0) {
+            featureList = '<ul class="product__description-features">';
+            for (const line of lines) {
+              const trimmed = line.trim();
+              if (trimmed) {
+                // Highlight text before colon
+                const colonIndex = trimmed.indexOf(':');
+                if (colonIndex > 0) {
+                  const label = trimmed.substring(0, colonIndex).trim();
+                  const value = trimmed.substring(colonIndex + 1).trim();
+                  featureList += `<li><strong>${label}:</strong> ${value}</li>`;
+                } else {
+                  featureList += `<li>${trimmed}</li>`;
+                }
+              }
+            }
+            featureList += '</ul>';
+          }
+        }
+        
+        // Rebuild content
+        let newContent = '';
+        if (introText) {
+          newContent += `<div class="product__description-intro">${introText}</div>`;
+        }
+        if (featureList) {
+          newContent += featureList;
+        }
+        
+        // If we have remaining content, add it
+        const remaining = tempDiv.innerHTML.trim();
+        if (remaining && !featureList) {
+          newContent += `<div class="product__description-fallback rte">${remaining}</div>`;
+        } else if (remaining) {
+          newContent += `<div class="product__description-remaining rte">${remaining}</div>`;
+        }
+        
+        // If no structure found, keep original
+        if (!introText && !featureList) {
+          newContent = html;
+        }
+        
+        descriptionContent.innerHTML = newContent;
+      }
+    }
     // Product Media Gallery
     const productThumbnails = productSection.querySelectorAll('.product__media-thumbnail');
     const productMediaItems = productSection.querySelectorAll('.product__media-item');
@@ -662,6 +748,7 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
   }
+});
 
 // Export for use in other scripts
 window.NegroJustTheme = {
