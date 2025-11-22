@@ -62,19 +62,29 @@
             "text": "La Gorra es el uniforme de batalla"
           }
         },
-        "banner_KgJQGE": {
+        "banner_W7wbwm": {
           "type": "banner",
           "settings": {
             "image": "shopify://shop_images/categoria-la-gloria-vive.jpg",
             "collection": "la-gloria-vive-retro-nostalgia",
-            "heading": "LA GLORIA VIVE: RETRO & NOSTALGIA",
+            "heading": "2LA GLORIA VIVE: RETRO & NOSTALGIA",
             "text": "¡Solo para los que saben de historia!"
+          }
+        },
+        "banner_1": {
+          "type": "banner",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_2medhe2medhe2med.png",
+            "collection": "frontpage",
+            "heading": "BUSOS",
+            "text": "Shop the collection"
           }
         }
       },
       "block_order": [
         "banner_2",
-        "banner_KgJQGE"
+        "banner_W7wbwm",
+        "banner_1"
       ],
       "settings": {
         "color_scheme": "background-1"
