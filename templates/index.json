@@ -74,10 +74,10 @@
         "banner_1": {
           "type": "banner",
           "settings": {
-            "image": "shopify://shop_images/Gemini_Generated_Image_2medhe2medhe2med.png",
-            "collection": "frontpage",
-            "heading": "BUSOS",
-            "text": "Shop the collection"
+            "image": "shopify://shop_images/categoria-verdolaga_basico.jpg",
+            "collection": "verdolaga-basico-el-dia-a-dia",
+            "heading": "VERDOLAGA BÁSICO: EL DÍA A DÍA",
+            "text": "Camisetas, Buzos y Accesorios con el ADN Verdolaga."
           }
         }
       },
