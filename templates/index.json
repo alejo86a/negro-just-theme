@@ -88,13 +88,23 @@
             "heading": "EL EQUIPO EN LA PIEL: RÉPLICAS & OFICIAL",
             "text": "Encuentra aquí las camisetas de juego"
           }
+        },
+        "banner_KYacHr": {
+          "type": "banner",
+          "settings": {
+            "image": "shopify://shop_images/catalogo-rincon-de-medias.jpg",
+            "collection": "el-rincon-de-las-medias",
+            "heading": "EL RINCÓN DE LAS MEDIAS",
+            "text": "Las medias para hacer el amor!"
+          }
         }
       },
       "block_order": [
         "banner_2",
         "banner_W7wbwm",
         "banner_1",
-        "banner_Ne6G6r"
+        "banner_Ne6G6r",
+        "banner_KYacHr"
       ],
       "settings": {
         "color_scheme": "background-1"
