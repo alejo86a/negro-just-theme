@@ -113,7 +113,7 @@
     "featured-product": {
       "type": "featured-product",
       "blocks": {
-        "product_slide_1": {
+        "product_slide_XFYWqb": {
           "type": "product_slide",
           "settings": {
             "media_text": "LOCAL 2025",
@@ -122,11 +122,24 @@
             "description": "La camiseta oficial del equipo verdolaga para la temporada 2025.",
             "price": "$99.99",
             "button_label": "Agregar al Carrito",
-            "button_link": "shopify://products/camiseta-local-2025"
+            "button_link": ""
+          }
+        },
+        "product_slide_1": {
+          "type": "product_slide",
+          "settings": {
+            "media_text": "VISITANTE 2025",
+            "title": "EL EQUIPO OFICIAL",
+            "product_title": "Camiseta ¡VISITANTE 2025!",
+            "description": "La camiseta oficial del equipo verdolaga para la temporada 2025.",
+            "price": "$99.99",
+            "button_label": "Agregar al Carrito",
+            "button_link": "shopify://products/camiseta-de-juego-alternativa-atletico-nacional-negra-y-dorada"
           }
         }
       },
       "block_order": [
+        "product_slide_XFYWqb",
         "product_slide_1"
       ],
       "settings": {
