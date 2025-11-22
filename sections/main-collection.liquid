@@ -43,6 +43,16 @@
             {{ collection.description }}
           </div>
         {%- endif -%}
+      {%- elsif section.settings.collection != blank -%}
+        {%- assign fallback_collection = collections[section.settings.collection] -%}
+        {%- if fallback_collection != blank -%}
+          <h1 class="collection-hero__title h0">{{ fallback_collection.title | escape }}</h1>
+          {%- if fallback_collection.description != blank -%}
+            <div class="collection-hero__description">
+              {{ fallback_collection.description }}
+            </div>
+          {%- endif -%}
+        {%- endif -%}
       {%- endif -%}
     </div>
     <div class="collection-hero__ripped-edge"></div>
@@ -129,6 +139,15 @@
 
       {%- comment -%} Product Grid Area {%- endcomment -%}
       <div class="collection-products">
+        {%- liquid
+          comment
+            Try to get collection from different sources
+          endcomment
+          if collection == blank and section.settings.collection != blank
+            assign collection = collections[section.settings.collection]
+          endif
+        -%}
+        
         {%- if collection != blank and collection.products_count > 0 -%}
           {%- paginate collection.products by products_per_page -%}
             <div class="collection-products__grid grid grid--4-col-desktop grid--3-col-tablet grid--2-col-mobile" data-product-grid>

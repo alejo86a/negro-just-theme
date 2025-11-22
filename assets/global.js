@@ -360,10 +360,11 @@ document.addEventListener('DOMContentLoaded', function() {
   
   if (featuredProductCarousel) {
     const featuredSlides = featuredProductCarousel.querySelectorAll('.featured-product__slide');
-    const featuredDots = document.querySelectorAll('[data-featured-product-dots] .featured-product__dot');
+    const featuredDotsContainer = document.querySelector('[data-featured-product-dots]');
+    const featuredDots = featuredDotsContainer ? featuredDotsContainer.querySelectorAll('.featured-product__dot') : [];
     const section = featuredProductCarousel.closest('.featured-product');
     const autoRotateInterval = section?.getAttribute('data-auto-rotate-interval') || '5';
-    const intervalSeconds = parseInt(autoRotateInterval) * 1000;
+    const intervalSeconds = parseInt(autoRotateInterval, 10) * 1000;
     
     if (featuredSlides.length > 1) {
       let currentFeaturedIndex = 0;
@@ -397,8 +398,11 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       
       function startAutoRotate() {
-        if (intervalSeconds > 0) {
-          autoRotateTimer = setInterval(showNextFeatured, intervalSeconds);
+        stopAutoRotate(); // Clear any existing timer first
+        if (intervalSeconds > 0 && featuredSlides.length > 1) {
+          autoRotateTimer = setInterval(function() {
+            showNextFeatured();
+          }, intervalSeconds);
         }
       }
       
@@ -419,13 +423,30 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       
       // Pause on hover
-      featuredProductCarousel.addEventListener('mouseenter', stopAutoRotate);
-      featuredProductCarousel.addEventListener('mouseleave', startAutoRotate);
+      if (featuredProductCarousel) {
+        featuredProductCarousel.addEventListener('mouseenter', stopAutoRotate);
+        featuredProductCarousel.addEventListener('mouseleave', startAutoRotate);
+      }
       
       // Initialize
       showFeaturedSlide(0);
-      startAutoRotate();
+      
+      // Start auto-rotate after a short delay to ensure DOM is ready
+      setTimeout(function() {
+        startAutoRotate();
+      }, 500);
+      
+      // Debug log
+      console.log('Featured product carousel initialized:', {
+        slides: featuredSlides.length,
+        dots: featuredDots.length,
+        interval: intervalSeconds + 'ms'
+      });
+    } else {
+      console.log('Featured product carousel: Only one slide, auto-rotate disabled');
     }
+  } else {
+    console.log('Featured product carousel: Carousel element not found');
   }
 
   // Header and Announcement Bar Hide/Show on Scroll

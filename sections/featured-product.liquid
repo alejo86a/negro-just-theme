@@ -8,7 +8,9 @@
       {%- for block in section.blocks -%}
         {%- liquid
           assign product = block.settings.product
-          assign current_variant = product.selected_or_first_available_variant
+          if product != blank
+            assign current_variant = product.selected_or_first_available_variant
+          endif
         -%}
         <div class="featured-product__slide{% if forloop.first %} active{% endif %}" {{ block.shopify_attributes }} data-slide-index="{{ forloop.index0 }}">
           <div class="featured-product__wrapper grid grid--2-col">
@@ -40,6 +42,7 @@
             </div>
             <div class="featured-product__content">
               {%- if product != blank -%}
+                {%- comment -%} Product data from Shopify {%- endcomment -%}
                 {%- if block.settings.title != blank -%}
                   <h2 class="featured-product__title h1">{{ block.settings.title }}</h2>
                 {%- endif -%}
@@ -56,11 +59,15 @@
                   </div>
                 {%- endif -%}
                 <div class="featured-product__price">
-                  {%- if current_variant.compare_at_price > current_variant.price -%}
-                    <span class="featured-product__price--sale">{{ current_variant.price | money }}</span>
-                    <span class="featured-product__price--compare">{{ current_variant.compare_at_price | money }}</span>
+                  {%- if current_variant != blank -%}
+                    {%- if current_variant.compare_at_price > current_variant.price -%}
+                      <span class="featured-product__price--sale">{{ current_variant.price | money }}</span>
+                      <span class="featured-product__price--compare">{{ current_variant.compare_at_price | money }}</span>
+                    {%- else -%}
+                      {{ current_variant.price | money }}
+                    {%- endif -%}
                   {%- else -%}
-                    {{ current_variant.price | money }}
+                    {{ product.price | money }}
                   {%- endif -%}
                 </div>
                 <a href="{{ product.url }}" class="button button--primary featured-product__button">
@@ -125,7 +132,7 @@
       "unit": "s",
       "label": "Auto-rotate interval",
       "default": 5,
-      "info": "Set to 0 to disable auto-rotation"
+      "info": "Set to 0 to disable auto-rotation. Default is 5 seconds."
     },
     {
       "type": "select",

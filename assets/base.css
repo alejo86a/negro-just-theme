@@ -2540,6 +2540,8 @@ a:hover {
   color: inherit;
   position: relative;
   z-index: 1;
+  pointer-events: auto;
+  cursor: pointer;
 }
 
 .product-card:hover .product-card__wrapper {

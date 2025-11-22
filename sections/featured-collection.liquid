@@ -10,19 +10,20 @@
 
     {%- liquid
       assign products_to_display = section.settings.products_to_show
+      assign selected_collection = blank
       if section.settings.collection != blank
-        assign collection = collections[section.settings.collection]
+        assign selected_collection = collections[section.settings.collection]
       endif
     -%}
 
     <div class="product-grid grid grid--4-col-desktop grid--2-col-tablet-down">
-      {%- if collection != blank and collection.products_count > 0 -%}
-        {%- for product in collection.products limit: products_to_display -%}
+      {%- if selected_collection != blank and selected_collection.products_count > 0 -%}
+        {%- for product in selected_collection.products limit: products_to_display -%}
           {% render 'product-card', product: product %}
         {%- endfor -%}
       {%- else -%}
-        {%- comment -%} Show placeholder only if no collection is selected {%- endcomment -%}
-        {%- if collection == blank -%}
+        {%- comment -%} Show placeholder only if no collection is selected or collection is empty {%- endcomment -%}
+        {%- if selected_collection == blank -%}
           {%- for i in (1..products_to_display) -%}
             {% render 'product-card-placeholder', index: i %}
           {%- endfor -%}
@@ -30,9 +31,9 @@
       {%- endif -%}
     </div>
 
-    {%- if section.settings.show_view_all and collection != blank -%}
+    {%- if section.settings.show_view_all and selected_collection != blank -%}
       <div class="featured-collection__view-all center">
-        <a href="{{ collection.url }}" class="button button--primary">
+        <a href="{{ selected_collection.url }}" class="button button--primary">
           {{ 'sections.featured_collection.view_all' | t }}
         </a>
       </div>
