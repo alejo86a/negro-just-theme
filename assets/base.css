@@ -2424,6 +2424,7 @@ a:hover {
   border-radius: 0;
   overflow: visible;
   transition: transform var(--transition-base);
+  display: block;
 }
 
 .product-card:hover {
@@ -2436,6 +2437,14 @@ a:hover {
   border: 2px solid transparent;
   border-radius: var(--border-radius);
   transition: border-color var(--transition-base);
+}
+
+.product-card__link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  z-index: 1;
 }
 
 .product-card:hover .product-card__wrapper {

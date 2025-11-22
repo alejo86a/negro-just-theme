@@ -807,6 +807,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Load More Functionality
     const loadMoreButton = collectionPage.querySelector('[data-load-more]');
     const productGrid = collectionPage.querySelector('[data-product-grid]');
+    const sectionId = collectionPage.dataset.sectionId;
     
     if (loadMoreButton && productGrid) {
       loadMoreButton.addEventListener('click', function() {
@@ -817,36 +818,103 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         const originalText = this.textContent;
-        this.disabled = true;
-        this.textContent = 'Cargando...';
+        const button = this;
+        button.disabled = true;
+        button.textContent = 'Cargando...';
 
         fetch(nextPageUrl)
           .then(response => response.text())
           .then(html => {
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, 'text/html');
-            const newProducts = doc.querySelector('[data-product-grid]');
-            const newLoadMore = doc.querySelector('[data-load-more]');
+            
+            // Buscar la sección específica de la colección usando el section ID
+            const collectionSection = doc.querySelector(`#CollectionSection-${sectionId}`);
+            let newProducts = null;
+            let newLoadMore = null;
+            
+            if (collectionSection) {
+              newProducts = collectionSection.querySelector('[data-product-grid]');
+              newLoadMore = collectionSection.querySelector('[data-load-more]');
+            } else {
+              // Fallback: buscar en toda la página pero solo la primera sección de colección
+              const allCollectionSections = doc.querySelectorAll('.collection-page');
+              if (allCollectionSections.length > 0) {
+                newProducts = allCollectionSections[0].querySelector('[data-product-grid]');
+                newLoadMore = allCollectionSections[0].querySelector('[data-load-more]');
+              }
+            }
 
             if (newProducts) {
-              const products = newProducts.querySelectorAll('.product-card');
+              const products = Array.from(newProducts.querySelectorAll('.product-card'));
+              const existingProductIds = new Set();
+              
+              // Obtener IDs de productos existentes para evitar duplicados
+              const existingProducts = productGrid.querySelectorAll('[data-product-id]');
+              for (const existing of existingProducts) {
+                const productId = existing.getAttribute('data-product-id');
+                if (productId) {
+                  existingProductIds.add(productId);
+                }
+              }
+              
+              const fragment = document.createDocumentFragment();
+              
               for (const product of products) {
-                productGrid.appendChild(product);
+                const productId = product.getAttribute('data-product-id');
+                
+                // Solo agregar si no existe ya
+                if (productId && !existingProductIds.has(productId)) {
+                  // Clonar el nodo profundamente para evitar problemas de referencia
+                  const clonedProduct = product.cloneNode(true);
+                  
+                  // Asegurar que los enlaces funcionen correctamente
+                  const links = clonedProduct.querySelectorAll('a[href]');
+                  for (const link of links) {
+                    const href = link.getAttribute('href');
+                    if (href && !href.startsWith('http') && !href.startsWith('//')) {
+                      // Convertir URL relativa a absoluta si es necesario
+                      try {
+                        const url = new URL(href, window.location.origin);
+                        link.setAttribute('href', url.pathname);
+                      } catch (e) {
+                        // Si falla, mantener el href original
+                        console.warn('Error processing product link:', href);
+                      }
+                    }
+                  }
+                  
+                  fragment.appendChild(clonedProduct);
+                  existingProductIds.add(productId);
+                }
+              }
+              
+              if (fragment.children.length > 0) {
+                productGrid.appendChild(fragment);
+              } else {
+                // Si no se agregaron productos nuevos, puede que ya estén todos cargados
+                console.log('No new products to add - may have reached end or duplicates detected');
               }
             }
 
             if (newLoadMore && newLoadMore.dataset.nextPage) {
-              this.dataset.nextPage = newLoadMore.dataset.nextPage;
-              this.disabled = false;
-              this.textContent = originalText;
+              button.dataset.nextPage = newLoadMore.dataset.nextPage;
+              button.disabled = false;
+              button.textContent = originalText;
             } else {
-              this.style.display = 'none';
+              // Ocultar el botón si no hay más páginas
+              const loadMoreContainer = button.closest('[data-load-more-container]');
+              if (loadMoreContainer) {
+                loadMoreContainer.style.display = 'none';
+              } else {
+                button.style.display = 'none';
+              }
             }
           })
           .catch(error => {
             console.error('Error loading more products:', error);
-            this.disabled = false;
-            this.textContent = originalText;
+            button.disabled = false;
+            button.textContent = originalText;
           });
       });
     }
