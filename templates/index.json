@@ -53,6 +53,15 @@
     "collection-banners": {
       "type": "collection-banners",
       "blocks": {
+        "banner_2": {
+          "type": "banner",
+          "settings": {
+            "image": "shopify://shop_images/categoria-gorras.png",
+            "collection": "gorras-codigo-verde",
+            "heading": "GORRAS: CÓDIGO VERDE",
+            "text": "La Gorra es el uniforme de batalla"
+          }
+        },
         "banner_1": {
           "type": "banner",
           "settings": {
@@ -61,19 +70,11 @@
             "heading": "BUSOS",
             "text": "Shop the collection"
           }
-        },
-        "banner_2": {
-          "type": "banner",
-          "settings": {
-            "collection": "",
-            "heading": "GORRAS",
-            "text": "Shop the collection"
-          }
         }
       },
       "block_order": [
-        "banner_1",
-        "banner_2"
+        "banner_2",
+        "banner_1"
       ],
       "settings": {
         "color_scheme": "background-1"
