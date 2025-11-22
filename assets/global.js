@@ -355,32 +355,77 @@ document.addEventListener('DOMContentLoaded', function() {
     setInterval(showNextCollection, 3000);
   }
 
-  // Featured Product Carousel (alternates between products)
-  const featuredSlides = document.querySelectorAll('.featured-product__slide');
+  // Featured Product Carousel (with auto-rotation and dots)
+  const featuredProductCarousel = document.querySelector('[data-featured-product-carousel]');
   
-  if (featuredSlides.length > 1) {
-    let currentFeaturedIndex = 0;
+  if (featuredProductCarousel) {
+    const featuredSlides = featuredProductCarousel.querySelectorAll('.featured-product__slide');
+    const featuredDots = document.querySelectorAll('[data-featured-product-dots] .featured-product__dot');
+    const section = featuredProductCarousel.closest('.featured-product');
+    const autoRotateInterval = section?.getAttribute('data-auto-rotate-interval') || '5';
+    const intervalSeconds = parseInt(autoRotateInterval) * 1000;
     
-    function showFeaturedSlide(index) {
-      for (const slide of featuredSlides) {
-        slide.classList.remove('active');
+    if (featuredSlides.length > 1) {
+      let currentFeaturedIndex = 0;
+      let autoRotateTimer = null;
+      
+      function showFeaturedSlide(index) {
+        // Remove active from all slides
+        for (const slide of featuredSlides) {
+          slide.classList.remove('active');
+        }
+        // Remove active from all dots
+        for (const dot of featuredDots) {
+          dot.classList.remove('active');
+        }
+        
+        // Add active to target slide
+        if (featuredSlides[index]) {
+          featuredSlides[index].classList.add('active');
+        }
+        // Add active to target dot
+        if (featuredDots[index]) {
+          featuredDots[index].classList.add('active');
+        }
+        
+        currentFeaturedIndex = index;
       }
-      if (featuredSlides[index]) {
-        featuredSlides[index].classList.add('active');
+      
+      function showNextFeatured() {
+        const nextIndex = (currentFeaturedIndex + 1) % featuredSlides.length;
+        showFeaturedSlide(nextIndex);
       }
-      currentFeaturedIndex = index;
+      
+      function startAutoRotate() {
+        if (intervalSeconds > 0) {
+          autoRotateTimer = setInterval(showNextFeatured, intervalSeconds);
+        }
+      }
+      
+      function stopAutoRotate() {
+        if (autoRotateTimer) {
+          clearInterval(autoRotateTimer);
+          autoRotateTimer = null;
+        }
+      }
+      
+      // Dot navigation
+      for (const [index, dot] of featuredDots.entries()) {
+        dot.addEventListener('click', function() {
+          stopAutoRotate();
+          showFeaturedSlide(index);
+          startAutoRotate();
+        });
+      }
+      
+      // Pause on hover
+      featuredProductCarousel.addEventListener('mouseenter', stopAutoRotate);
+      featuredProductCarousel.addEventListener('mouseleave', startAutoRotate);
+      
+      // Initialize
+      showFeaturedSlide(0);
+      startAutoRotate();
     }
-    
-    function showNextFeatured() {
-      const nextIndex = (currentFeaturedIndex + 1) % featuredSlides.length;
-      showFeaturedSlide(nextIndex);
-    }
-    
-    // Initialize
-    showFeaturedSlide(0);
-    
-    // Auto-rotate every 4 seconds
-    setInterval(showNextFeatured, 4000);
   }
 
   // Header and Announcement Bar Hide/Show on Scroll

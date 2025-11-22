@@ -92,6 +92,11 @@
       "back_to_home": "Back to Home"
     }
   },
+  "sections": {
+    "featured_product": {
+      "go_to_slide": "Go to slide {{ slide }}"
+    }
+  },
   "templates": {
     "cart": {
       "cart": "Cart"

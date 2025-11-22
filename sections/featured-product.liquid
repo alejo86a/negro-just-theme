@@ -1,45 +1,112 @@
 {% comment %}
-  Featured Product Section - Current Kit (Camiseta ¡LOCAL 2025!)
+  Featured Product Section - With Real Products from Shopify
 {% endcomment %}
 
-{%- liquid
-  assign product = section.settings.product
--%}
-
-<div class="featured-product color-{{ section.settings.color_scheme }} gradient">
+<div class="featured-product color-{{ section.settings.color_scheme }} gradient" data-auto-rotate-interval="{{ section.settings.auto_rotate_interval }}">
   <div class="page-width">
-    <div class="featured-product__carousel">
+    <div class="featured-product__carousel" data-featured-product-carousel>
       {%- for block in section.blocks -%}
-        <div class="featured-product__slide{% if forloop.first %} active{% endif %}" {{ block.shopify_attributes }}>
+        {%- liquid
+          assign product = block.settings.product
+          assign current_variant = product.selected_or_first_available_variant
+        -%}
+        <div class="featured-product__slide{% if forloop.first %} active{% endif %}" {{ block.shopify_attributes }} data-slide-index="{{ forloop.index0 }}">
           <div class="featured-product__wrapper grid grid--2-col">
             <div class="featured-product__media">
-              <span class="featured-product__media-text">{{ block.settings.media_text }}</span>
+              {%- if product != blank and product.featured_media != blank -%}
+                <a href="{{ product.url }}" class="featured-product__media-link">
+                  <img
+                    srcset="{%- if product.featured_media.width >= 375 -%}{{ product.featured_media | image_url: width: 375 }} 375w,{%- endif -%}
+                            {%- if product.featured_media.width >= 750 -%}{{ product.featured_media | image_url: width: 750 }} 750w,{%- endif -%}
+                            {%- if product.featured_media.width >= 1100 -%}{{ product.featured_media | image_url: width: 1100 }} 1100w,{%- endif -%}
+                            {%- if product.featured_media.width >= 1500 -%}{{ product.featured_media | image_url: width: 1500 }} 1500w,{%- endif -%}
+                            {{ product.featured_media | image_url }} {{ product.featured_media.width }}w"
+                    src="{{ product.featured_media | image_url: width: 750 }}"
+                    sizes="(min-width: 990px) 50vw, 100vw"
+                    alt="{{ product.featured_media.alt | escape | default: product.title | escape }}"
+                    loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                    width="{{ product.featured_media.width }}"
+                    height="{{ product.featured_media.height }}"
+                    class="featured-product__image"
+                  >
+                </a>
+              {%- elsif block.settings.media_text != blank -%}
+                <div class="featured-product__media-text-wrapper">
+                  <span class="featured-product__media-text">{{ block.settings.media_text }}</span>
+                </div>
+              {%- else -%}
+                {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg featured-product__placeholder' }}
+              {%- endif -%}
             </div>
             <div class="featured-product__content">
-              {%- if block.settings.title != blank -%}
-                <h2 class="featured-product__title h1">{{ block.settings.title }}</h2>
-              {%- endif -%}
-              {%- if block.settings.product_title != blank -%}
-                <h3 class="featured-product__product-title h2">{{ block.settings.product_title }}</h3>
-              {%- endif -%}
-              {%- if block.settings.description != blank -%}
-                <div class="featured-product__description rte">
-                  <p>{{ block.settings.description }}</p>
+              {%- if product != blank -%}
+                {%- if block.settings.title != blank -%}
+                  <h2 class="featured-product__title h1">{{ block.settings.title }}</h2>
+                {%- endif -%}
+                <h3 class="featured-product__product-title h2">
+                  <a href="{{ product.url }}" class="featured-product__product-link">{{ product.title | escape }}</a>
+                </h3>
+                {%- if product.description != blank -%}
+                  <div class="featured-product__description rte">
+                    {{ product.description | strip_html | truncatewords: 30 }}
+                  </div>
+                {%- elsif block.settings.description != blank -%}
+                  <div class="featured-product__description rte">
+                    <p>{{ block.settings.description }}</p>
+                  </div>
+                {%- endif -%}
+                <div class="featured-product__price">
+                  {%- if current_variant.compare_at_price > current_variant.price -%}
+                    <span class="featured-product__price--sale">{{ current_variant.price | money }}</span>
+                    <span class="featured-product__price--compare">{{ current_variant.compare_at_price | money }}</span>
+                  {%- else -%}
+                    {{ current_variant.price | money }}
+                  {%- endif -%}
                 </div>
-              {%- endif -%}
-              {%- if block.settings.price != blank -%}
-                <div class="featured-product__price">{{ block.settings.price }}</div>
-              {%- endif -%}
-              {%- if block.settings.button_label != blank -%}
-                <a href="{{ block.settings.button_link }}" class="button button--primary featured-product__button">
-                  {{ block.settings.button_label }}
+                <a href="{{ product.url }}" class="button button--primary featured-product__button">
+                  {{ block.settings.button_label | default: 'Ver Producto' }}
                 </a>
+              {%- else -%}
+                {%- comment -%} Fallback to manual content if no product selected {%- endcomment -%}
+                {%- if block.settings.title != blank -%}
+                  <h2 class="featured-product__title h1">{{ block.settings.title }}</h2>
+                {%- endif -%}
+                {%- if block.settings.product_title != blank -%}
+                  <h3 class="featured-product__product-title h2">{{ block.settings.product_title }}</h3>
+                {%- endif -%}
+                {%- if block.settings.description != blank -%}
+                  <div class="featured-product__description rte">
+                    <p>{{ block.settings.description }}</p>
+                  </div>
+                {%- endif -%}
+                {%- if block.settings.price != blank -%}
+                  <div class="featured-product__price">{{ block.settings.price }}</div>
+                {%- endif -%}
+                {%- if block.settings.button_label != blank -%}
+                  <a href="{{ block.settings.button_link | default: '#' }}" class="button button--primary featured-product__button">
+                    {{ block.settings.button_label }}
+                  </a>
+                {%- endif -%}
               {%- endif -%}
             </div>
           </div>
         </div>
       {%- endfor -%}
     </div>
+    
+    {%- comment -%} Carousel Dots Navigation {%- endcomment -%}
+    {%- if section.blocks.size > 1 -%}
+      <div class="featured-product__dots" data-featured-product-dots>
+        {%- for block in section.blocks -%}
+          <button
+            type="button"
+            class="featured-product__dot{% if forloop.first %} active{% endif %}"
+            aria-label="{{ 'sections.featured_product.go_to_slide' | t: slide: forloop.index }}"
+            data-dot-index="{{ forloop.index0 }}"
+          ></button>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
   </div>
 </div>
 
@@ -49,6 +116,17 @@
   "tag": "section",
   "class": "section-featured-product",
   "settings": [
+    {
+      "type": "range",
+      "id": "auto_rotate_interval",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "label": "Auto-rotate interval",
+      "default": 5,
+      "info": "Set to 0 to disable auto-rotation"
+    },
     {
       "type": "select",
       "id": "color_scheme",
@@ -84,45 +162,52 @@
       "name": "Product Slide",
       "settings": [
         {
+          "type": "product",
+          "id": "product",
+          "label": "Product",
+          "info": "Select a product to display. If no product is selected, you can use manual content below."
+        },
+        {
           "type": "text",
           "id": "media_text",
-          "default": "LOCAL 2025",
-          "label": "Media text"
+          "label": "Media text (fallback)",
+          "info": "Only shown if no product image is available"
         },
         {
           "type": "text",
           "id": "title",
-          "default": "EL EQUIPO OFICIAL",
-          "label": "Title"
+          "label": "Title",
+          "info": "Optional title above product name"
         },
         {
           "type": "text",
           "id": "product_title",
-          "default": "Camiseta ¡LOCAL 2025!",
-          "label": "Product title"
+          "label": "Product title (fallback)",
+          "info": "Only used if no product is selected"
         },
         {
           "type": "textarea",
           "id": "description",
-          "default": "La camiseta oficial del equipo verdolaga para la temporada 2025.",
-          "label": "Description"
+          "label": "Description (fallback)",
+          "info": "Only used if product has no description"
         },
         {
           "type": "text",
           "id": "price",
-          "default": "$99.99",
-          "label": "Price"
+          "label": "Price (fallback)",
+          "info": "Only used if no product is selected"
         },
         {
           "type": "text",
           "id": "button_label",
-          "default": "Agregar al Carrito",
+          "default": "Ver Producto",
           "label": "Button label"
         },
         {
           "type": "url",
           "id": "button_link",
-          "label": "Button link"
+          "label": "Button link (fallback)",
+          "info": "Only used if no product is selected"
         }
       ]
     }
@@ -132,26 +217,10 @@
       "name": "Featured Product",
       "blocks": [
         {
-          "type": "product_slide",
-          "settings": {
-            "media_text": "LOCAL 2025",
-            "title": "EL EQUIPO OFICIAL",
-            "product_title": "Camiseta ¡LOCAL 2025!",
-            "description": "La camiseta oficial del equipo verdolaga para la temporada 2025."
-          }
-        },
-        {
-          "type": "product_slide",
-          "settings": {
-            "media_text": "VISITANTE 2025",
-            "title": "LA NUEVA ALTERNATIVA",
-            "product_title": "Camiseta ¡VISITANTE 2025!",
-            "description": "La nueva camiseta de visitante para la temporada 2025."
-          }
+          "type": "product_slide"
         }
       ]
     }
   ]
 }
 {% endschema %}
-

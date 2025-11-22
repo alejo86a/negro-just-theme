@@ -10,18 +10,23 @@
 
     {%- liquid
       assign products_to_display = section.settings.products_to_show
-      assign collection = section.settings.collection
+      if section.settings.collection != blank
+        assign collection = collections[section.settings.collection]
+      endif
     -%}
 
     <div class="product-grid grid grid--4-col-desktop grid--2-col-tablet-down">
-      {%- if collection != blank -%}
+      {%- if collection != blank and collection.products_count > 0 -%}
         {%- for product in collection.products limit: products_to_display -%}
           {% render 'product-card', product: product %}
         {%- endfor -%}
       {%- else -%}
-        {%- for i in (1..products_to_display) -%}
-          {% render 'product-card-placeholder', index: i %}
-        {%- endfor -%}
+        {%- comment -%} Show placeholder only if no collection is selected {%- endcomment -%}
+        {%- if collection == blank -%}
+          {%- for i in (1..products_to_display) -%}
+            {% render 'product-card-placeholder', index: i %}
+          {%- endfor -%}
+        {%- endif -%}
       {%- endif -%}
     </div>
 

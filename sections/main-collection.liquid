@@ -3,7 +3,11 @@
 {% endcomment %}
 
 {%- liquid
-  if section.settings.collection != blank
+  comment
+    In collection template, Shopify automatically provides the collection object
+    If collection is not available, try to get it from section settings
+  endcomment
+  if collection == blank and section.settings.collection != blank
     assign collection = collections[section.settings.collection]
   endif
   assign products_per_page = section.settings.products_per_page | default: 24
@@ -32,11 +36,13 @@
     {%- endif -%}
     <div class="collection-hero__overlay"></div>
     <div class="collection-hero__content page-width">
-      <h1 class="collection-hero__title h0">{{ collection.title | escape }}</h1>
-      {%- if collection.description != blank -%}
-        <div class="collection-hero__description">
-          {{ collection.description }}
-        </div>
+      {%- if collection != blank -%}
+        <h1 class="collection-hero__title h0">{{ collection.title | escape }}</h1>
+        {%- if collection.description != blank -%}
+          <div class="collection-hero__description">
+            {{ collection.description }}
+          </div>
+        {%- endif -%}
       {%- endif -%}
     </div>
     <div class="collection-hero__ripped-edge"></div>

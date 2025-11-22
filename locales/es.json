@@ -96,6 +96,11 @@
       "back_to_home": "Volver al Inicio"
     }
   },
+  "sections": {
+    "featured_product": {
+      "go_to_slide": "Ir a la diapositiva {{ slide }}"
+    }
+  },
   "templates": {
     "cart": {
       "cart": "Carrito"
