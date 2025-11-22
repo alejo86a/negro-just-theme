@@ -79,12 +79,22 @@
             "heading": "VERDOLAGA BÁSICO: EL DÍA A DÍA",
             "text": "Camisetas, Buzos y Accesorios con el ADN Verdolaga."
           }
+        },
+        "banner_Ne6G6r": {
+          "type": "banner",
+          "settings": {
+            "image": "shopify://shop_images/categoria-replicas.png",
+            "collection": "el-equipo-en-la-piel-replicas-oficial",
+            "heading": "EL EQUIPO EN LA PIEL: RÉPLICAS & OFICIAL",
+            "text": "Encuentra aquí las camisetas de juego"
+          }
         }
       },
       "block_order": [
         "banner_2",
         "banner_W7wbwm",
-        "banner_1"
+        "banner_1",
+        "banner_Ne6G6r"
       ],
       "settings": {
         "color_scheme": "background-1"
