@@ -42,7 +42,6 @@
     },
     "featured-collection": {
       "type": "featured-collection",
-      "disabled": true,
       "settings": {
         "title": "LO NUEVO | CAMISETAS EXCLUSIVAS",
         "collection": "disenos-modernos",
