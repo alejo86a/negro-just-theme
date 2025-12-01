@@ -14,11 +14,11 @@
         endif
       -%}
       
-      {%- for grid_index in (0..grid_count) -%}
-        {%- assign start_index = grid_index | times: blocks_per_grid -%}
+      {%- for grid_index in (1..grid_count) -%}
+        {%- assign start_index = grid_index | minus: 1 | times: blocks_per_grid -%}
         {%- assign end_index = start_index | plus: blocks_per_grid | minus: 1 -%}
         {%- if start_index < section.blocks.size -%}
-          <div class="collection-banners__grid grid grid--2-col{% if grid_index == 0 %} active{% endif %}">
+          <div class="collection-banners__grid grid grid--2-col{% if grid_index == 1 %} active{% endif %}">
             {%- for block in section.blocks limit: blocks_per_grid offset: start_index -%}
               <div class="collection-banner" {{ block.shopify_attributes }}>
                 {%- if block.settings.image != blank -%}
