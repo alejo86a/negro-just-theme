@@ -50,6 +50,12 @@
           "logo_width": 220
         }
       },
+      "hero-banner": {
+        "type": "hero-banner",
+        "settings": {
+          "color_scheme": "background-1"
+        }
+      },
       "featured-collection": {
         "type": "featured-collection",
         "settings": {
@@ -57,6 +63,12 @@
           "collection": "",
           "products_to_show": 4,
           "show_view_all": true,
+          "color_scheme": "background-1"
+        }
+      },
+      "collection-banners": {
+        "type": "collection-banners",
+        "settings": {
           "color_scheme": "background-1"
         }
       },

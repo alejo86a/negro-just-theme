@@ -5,21 +5,13 @@
 <div class="collection-banners color-{{ section.settings.color_scheme }} gradient">
   <div class="page-width">
     <div class="collection-banners__carousel">
-      {%- assign blocks_per_grid = 2 -%}
-      {%- assign grid_count = section.blocks.size | divided_by: blocks_per_grid -%}
-      {%- if section.blocks.size modulo blocks_per_grid > 0 -%}
-        {%- assign grid_count = grid_count | plus: 1 -%}
-      {%- endif -%}
-      
-      {%- for grid_index in (0..grid_count) -%}
-        {%- assign start_index = grid_index | times: blocks_per_grid -%}
-        {%- assign end_index = start_index | plus: blocks_per_grid | minus: 1 -%}
-        {%- if start_index < section.blocks.size -%}
-          <div class="collection-banners__grid grid grid--2-col{% if grid_index == 0 %} active{% endif %}">
-            {%- for block in section.blocks limit: blocks_per_grid offset: start_index -%}
-              <div class="collection-banner" {{ block.shopify_attributes }}>
-                {%- if block.settings.image != blank -%}
-                  <a href="{{ block.settings.collection.url }}" class="collection-banner__link">
+      {%- if section.blocks.size >= 2 -%}
+        <div class="collection-banners__grid grid grid--2-col active">
+          {%- for block in section.blocks limit: 2 -%}
+            <div class="collection-banner" {{ block.shopify_attributes }}>
+              {%- if block.settings.collection != blank -%}
+                <a href="{{ block.settings.collection.url }}" class="collection-banner__link">
+                  {%- if block.settings.image != blank -%}
                     <div class="collection-banner__media">
                       <img
                         srcset="{%- if block.settings.image.width >= 375 -%}{{ block.settings.image | image_url: width: 375 }} 375w,{%- endif -%}
@@ -35,25 +27,80 @@
                         class="collection-banner__image"
                       >
                     </div>
-                    <div class="collection-banner__content">
-                      {%- if block.settings.heading != blank -%}
-                        <h3 class="collection-banner__heading h2">{{ block.settings.heading }}</h3>
-                      {%- endif -%}
-                      {%- if block.settings.text != blank -%}
-                        <p class="collection-banner__text">{{ block.settings.text }}</p>
-                      {%- endif -%}
-                    </div>
-                  </a>
-                {%- else -%}
-                  <div class="collection-banner__placeholder">
-                    {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {%- endif -%}
+                  <div class="collection-banner__content">
+                    {%- if block.settings.heading != blank -%}
+                      <h3 class="collection-banner__heading h2">{{ block.settings.heading }}</h3>
+                    {%- endif -%}
+                    {%- if block.settings.text != blank -%}
+                      <p class="collection-banner__text">{{ block.settings.text }}</p>
+                    {%- endif -%}
                   </div>
-                {%- endif -%}
-              </div>
-            {%- endfor -%}
-          </div>
-        {%- endif -%}
-      {%- endfor -%}
+                </a>
+              {%- else -%}
+                <div class="collection-banner__placeholder">
+                  <div class="collection-banner__content">
+                    {%- if block.settings.heading != blank -%}
+                      <h3 class="collection-banner__heading h2">{{ block.settings.heading }}</h3>
+                    {%- endif -%}
+                    {%- if block.settings.text != blank -%}
+                      <p class="collection-banner__text">{{ block.settings.text }}</p>
+                    {%- endif -%}
+                  </div>
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+      {%- if section.blocks.size >= 4 -%}
+        <div class="collection-banners__grid grid grid--2-col">
+          {%- for block in section.blocks offset: 2 limit: 2 -%}
+            <div class="collection-banner" {{ block.shopify_attributes }}>
+              {%- if block.settings.collection != blank -%}
+                <a href="{{ block.settings.collection.url }}" class="collection-banner__link">
+                  {%- if block.settings.image != blank -%}
+                    <div class="collection-banner__media">
+                      <img
+                        srcset="{%- if block.settings.image.width >= 375 -%}{{ block.settings.image | image_url: width: 375 }} 375w,{%- endif -%}
+                                {%- if block.settings.image.width >= 750 -%}{{ block.settings.image | image_url: width: 750 }} 750w,{%- endif -%}
+                                {%- if block.settings.image.width >= 1100 -%}{{ block.settings.image | image_url: width: 1100 }} 1100w,{%- endif -%}
+                                {{ block.settings.image | image_url }} {{ block.settings.image.width }}w"
+                        src="{{ block.settings.image | image_url: width: 750 }}"
+                        sizes="(min-width: 750px) 50vw, 100vw"
+                        alt="{{ block.settings.heading | escape }}"
+                        loading="lazy"
+                        width="{{ block.settings.image.width }}"
+                        height="{{ block.settings.image.height }}"
+                        class="collection-banner__image"
+                      >
+                    </div>
+                  {%- endif -%}
+                  <div class="collection-banner__content">
+                    {%- if block.settings.heading != blank -%}
+                      <h3 class="collection-banner__heading h2">{{ block.settings.heading }}</h3>
+                    {%- endif -%}
+                    {%- if block.settings.text != blank -%}
+                      <p class="collection-banner__text">{{ block.settings.text }}</p>
+                    {%- endif -%}
+                  </div>
+                </a>
+              {%- else -%}
+                <div class="collection-banner__placeholder">
+                  <div class="collection-banner__content">
+                    {%- if block.settings.heading != blank -%}
+                      <h3 class="collection-banner__heading h2">{{ block.settings.heading }}</h3>
+                    {%- endif -%}
+                    {%- if block.settings.text != blank -%}
+                      <p class="collection-banner__text">{{ block.settings.text }}</p>
+                    {%- endif -%}
+                  </div>
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
     </div>
   </div>
 </div>

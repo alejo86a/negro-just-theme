@@ -24,12 +24,25 @@
       "menu": "Menú",
       "cart_count": "{{ count }} artículos en el carrito"
     },
+    "hero_banner": {
+      "name": "Banner Hero"
+    },
+    "collection_banners": {
+      "name": "Banners de Colección"
+    },
+    "featured_collection": {
+      "view_all": "Ver Todo",
+      "title": "LO NUEVO | CAMISETAS EXCLUSIVAS"
+    },
+    "featured_product": {
+      "name": "Producto Destacado"
+    },
+    "slogan_section": {
+      "name": "Sección de Eslogan"
+    },
     "cart": {
       "cart_error": "Hubo un error al actualizar tu carrito. Por favor, inténtalo de nuevo.",
       "cart_quantity_error_html": "Solo puedes agregar {{ quantity }} de este artículo a tu carrito."
-    },
-    "featured_collection": {
-      "view_all": "Ver Todo"
     }
   },
   "products": {
