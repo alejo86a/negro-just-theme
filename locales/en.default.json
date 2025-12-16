@@ -25,7 +25,8 @@
       "cart_count": "{{ count }} items in cart"
     },
     "hero_banner": {
-      "name": "Hero Banner"
+      "name": "Hero Banner",
+      "go_to_slide": "Go to slide {{ number }}"
     },
     "collection_banners": {
       "name": "Collection Banners"

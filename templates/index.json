@@ -1,124 +1,103 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
-    "hero-banner": {
+    "hero_banner": {
       "type": "hero-banner",
       "blocks": {
         "slide_1": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/New_Project.png",
-            "heading": "FAMILIA, RIFA GRATIS DE UN SOLO GANADOR",
-            "text": "",
-            "button_label": "Participa aqui",
-            "button_link": "https://x.com/NegroJust/status/1986947529276043458"
+            "heading": "NUEVA COLECCIÓN",
+            "text": "<p>Descubre la pasión verdolaga</p>",
+            "button_label": "CONÓCELA AQUÍ",
+            "button_link": ""
           }
         },
-        "slide_NPyBTi": {
+        "slide_2": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/Captura_de_pantalla_2025-11-21_a_la_s_9.26.39_p.m..png",
-            "heading": "NUEVA COLECCIÓN",
-            "text": "<p>Descubre la pasión verdolaga con nuestra colección exclusiva</p>",
-            "button_label": "CONÓCELA AQUÍ",
+            "heading": "BUSO RETRO LIBERTADORES '89",
+            "text": "<p>Edición limitada</p>",
+            "button_label": "COMPRAR BUSOS",
+            "button_link": ""
+          }
+        },
+        "slide_3": {
+          "type": "slide",
+          "settings": {
+            "heading": "CAMISETA LOCAL 2025",
+            "text": "<p>La nueva camiseta oficial</p>",
+            "button_label": "COMPRAR AHORA",
             "button_link": ""
           }
         }
       },
       "block_order": [
         "slide_1",
-        "slide_NPyBTi"
+        "slide_2",
+        "slide_3"
       ],
       "settings": {
         "color_scheme": "background-1"
       }
     },
-    "featured-collection": {
+    "featured_collection": {
       "type": "featured-collection",
       "settings": {
         "title": "LO NUEVO | CAMISETAS EXCLUSIVAS",
-        "collection": "disenos-modernos",
         "products_to_show": 4,
         "show_view_all": true,
         "color_scheme": "background-1"
       }
     },
-    "collection-banners": {
+    "collection_banners": {
       "type": "collection-banners",
       "blocks": {
-        "banner_2": {
-          "type": "banner",
-          "settings": {
-            "image": "shopify://shop_images/categoria-gorras.png",
-            "collection": "gorras-codigo-verde",
-            "heading": "GORRAS: CÓDIGO VERDE",
-            "text": "La Gorra es el uniforme de batalla"
-          }
-        },
-        "banner_W7wbwm": {
-          "type": "banner",
-          "settings": {
-            "image": "shopify://shop_images/categoria-la-gloria-vive.jpg",
-            "collection": "la-gloria-vive-retro-nostalgia",
-            "heading": "LA GLORIA VIVE: RETRO & NOSTALGIA",
-            "text": "¡Solo para los que saben de historia!"
-          }
-        },
         "banner_1": {
           "type": "banner",
           "settings": {
-            "image": "shopify://shop_images/categoria-verdolaga_basico.jpg",
-            "collection": "verdolaga-basico-el-dia-a-dia",
-            "heading": "VERDOLAGA BÁSICO: EL DÍA A DÍA",
-            "text": "Camisetas, Buzos y Accesorios con el ADN Verdolaga."
+            "heading": "BUSOS",
+            "text": "Explora nuestra colección"
           }
         },
-        "banner_Ne6G6r": {
+        "banner_2": {
           "type": "banner",
           "settings": {
-            "image": "shopify://shop_images/categoria-replicas.png",
-            "collection": "el-equipo-en-la-piel-replicas-oficial",
-            "heading": "EL EQUIPO EN LA PIEL: RÉPLICAS & OFICIAL",
-            "text": "Encuentra aquí las camisetas de juego"
+            "heading": "GORRAS",
+            "text": "Descubre nuestros diseños"
           }
         },
-        "banner_KYacHr": {
+        "banner_3": {
           "type": "banner",
           "settings": {
-            "image": "shopify://shop_images/catalogo-rincon-de-medias.jpg",
-            "collection": "el-rincon-de-las-medias",
-            "heading": "EL RINCÓN DE LAS MEDIAS",
-            "text": "Las medias para hacer el amor!"
+            "heading": "MEDIAS",
+            "text": "Completa tu look"
+          }
+        },
+        "banner_4": {
+          "type": "banner",
+          "settings": {
+            "heading": "CAMISETAS",
+            "text": "Viste los colores"
           }
         }
       },
       "block_order": [
-        "banner_2",
-        "banner_W7wbwm",
         "banner_1",
-        "banner_Ne6G6r",
-        "banner_KYacHr"
+        "banner_2",
+        "banner_3",
+        "banner_4"
       ],
       "settings": {
         "color_scheme": "background-1"
       }
     },
-    "featured-product": {
+    "featured_product": {
       "type": "featured-product",
       "blocks": {
-        "product_slide_XFYWqb": {
+        "product_slide_1": {
           "type": "product_slide",
           "settings": {
-            "product": "camiseta-local-2025",
-            "media_text": "LOCAL 2025",
+            "media_text": "LOCAL<br>2025",
             "title": "EL EQUIPO OFICIAL",
             "product_title": "Camiseta ¡LOCAL 2025!",
             "description": "La camiseta oficial del equipo verdolaga para la temporada 2025.",
@@ -127,30 +106,28 @@
             "button_link": ""
           }
         },
-        "product_slide_1": {
+        "product_slide_2": {
           "type": "product_slide",
           "settings": {
-            "product": "camiseta-de-juego-alternativa-atletico-nacional-negra-y-dorada",
-            "media_text": "VISITANTE 2025",
-            "title": "EL EQUIPO OFICIAL",
+            "media_text": "VISITANTE<br>2025",
+            "title": "LA NUEVA ALTERNATIVA",
             "product_title": "Camiseta ¡VISITANTE 2025!",
-            "description": "La camiseta oficial del equipo verdolaga para la temporada 2025.",
+            "description": "La nueva camiseta de visitante para la temporada 2025.",
             "price": "$99.99",
             "button_label": "Agregar al Carrito",
-            "button_link": "shopify://products/camiseta-de-juego-alternativa-atletico-nacional-negra-y-dorada"
+            "button_link": ""
           }
         }
       },
       "block_order": [
-        "product_slide_XFYWqb",
-        "product_slide_1"
+        "product_slide_1",
+        "product_slide_2"
       ],
       "settings": {
-        "auto_rotate_interval": 5,
         "color_scheme": "background-1"
       }
     },
-    "slogan-section": {
+    "slogan_section": {
       "type": "slogan-section",
       "settings": {
         "slogan": "VERDE Y BLANCO: UNA PASIÓN DE DOS COLORES.",
@@ -159,10 +136,13 @@
     }
   },
   "order": [
-    "hero-banner",
-    "featured-collection",
-    "collection-banners",
-    "featured-product",
-    "slogan-section"
+    "hero_banner",
+    "featured_collection",
+    "collection_banners",
+    "featured_product",
+    "slogan_section"
   ]
 }
+
+
+
