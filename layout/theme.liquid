@@ -47,19 +47,9 @@
       {{ body_font_italic | font_face: font_display: 'swap' }}
       {{ body_font_bold_italic | font_face: font_display: 'swap' }}
       {{ settings.font_heading | font_face: font_display: 'swap' }}
-
-      :root {
-        --color-primary: {{ settings.color_primary | default: '#1E442F' }};
-        --color-accent: {{ settings.color_accent | default: '#6BFF4E' }};
-        --color-secondary-accent: {{ settings.color_secondary_accent | default: '#FFC700' }};
-        --color-text: {{ settings.color_text | default: '#F0EAD6' }};
-        --color-black: #000000;
-        --color-white: #FFFFFF;
-        
-        --font-heading: {{ settings.font_heading.family }}, {{ settings.font_heading.fallback_families }};
-        --font-body: {{ settings.font_body.family }}, {{ settings.font_body.fallback_families }};
-      }
     {% endstyle %}
+
+    {% render 'theme-styles-variables' %}
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
   </head>

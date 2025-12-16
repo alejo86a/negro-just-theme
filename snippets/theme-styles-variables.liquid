@@ -1,0 +1,27 @@
+{% comment %}
+  Theme Styles Variables - Global CSS Variables
+{% endcomment %}
+
+{%- style -%}
+  :root {
+    /* Color Variables */
+    --color-primary: {{ settings.color_primary | default: '#1E442F' }};
+    --color-accent: {{ settings.color_accent | default: '#6BFF4E' }};
+    --color-secondary-accent: {{ settings.color_secondary_accent | default: '#FFC700' }};
+    --color-text: {{ settings.color_text | default: '#F0EAD6' }};
+    --color-black: #000000;
+    --color-white: #FFFFFF;
+
+    /* Font Variables */
+    --font-heading: {{ settings.font_heading.family }}, {{ settings.font_heading.fallback_families }};
+    --font-body: {{ settings.font_body.family }}, {{ settings.font_body.fallback_families }};
+
+    /* Layout Variables */
+    --spacing-unit: 1rem;
+    --page-width: {{ settings.page_width | default: 1200 }}px;
+    --border-radius: 4px;
+
+    /* Animation Variables */
+    --transition-base: 0.3s ease;
+  }
+{%- endstyle -%}

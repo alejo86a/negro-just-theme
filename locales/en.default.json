@@ -18,21 +18,32 @@
   "sections": {
     "announcement_bar": {
       "label": "Announcement bar",
-      "default_message": "Free shipping on all orders!"
+      "default_message": "FREE SHIPPING ON ALL PURCHASES! WHILE SUPPLIES LAST."
     },
     "header": {
       "menu": "Menu",
       "cart_count": "{{ count }} items in cart"
     },
+    "hero_banner": {
+      "name": "Hero Banner"
+    },
+    "collection_banners": {
+      "name": "Collection Banners"
+    },
+    "featured_collection": {
+      "view_all": "View All",
+      "title": "NEW | EXCLUSIVE T-SHIRTS"
+    },
+    "featured_product": {
+      "name": "Featured Product",
+      "go_to_slide": "Go to slide {{ slide }}"
+    },
+    "slogan_section": {
+      "name": "Slogan Section"
+    },
     "cart": {
       "cart_error": "There was an error while updating your cart. Please try again.",
       "cart_quantity_error_html": "You can only add {{ quantity }} of this item to your cart."
-    },
-    "featured_collection": {
-      "view_all": "View All"
-    },
-    "featured_product": {
-      "go_to_slide": "Go to slide {{ slide }}"
     },
     "footer": {
       "copyright": "All rights reserved."
