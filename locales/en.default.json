@@ -30,6 +30,12 @@
     },
     "featured_collection": {
       "view_all": "View All"
+    },
+    "footer": {
+      "copyright": "All rights reserved."
+    },
+    "hero_banner": {
+      "go_to_slide": "Go to slide {{ number }}"
     }
   },
   "products": {
@@ -54,11 +60,6 @@
     "label": "Email address",
     "button_label": "Subscribe",
     "success": "Thanks for subscribing!"
-  },
-  "sections": {
-    "footer": {
-      "copyright": "All rights reserved."
-    }
   }
 }
 

@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEGRO JUST - Preview</title>
+    <title>NEGRO JUST - Preview Theme</title>
+    <meta name="description" content="Tienda oficial NEGRO JUST - Productos exclusivos para aficionados verdolagas">
     <link rel="stylesheet" href="assets/base.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,11 +31,11 @@
     </svg>
 
     <!-- Announcement Bar with Rotating Messages -->
-    <div class="announcement-bar color-accent-1 gradient visible" role="region">
+    <div class="announcement-bar color-accent-1 gradient visible" role="region" aria-label="Anuncios">
         <div class="page-width" style="position: relative; min-height: 2rem;">
-            <p class="announcement-bar__message h5 active" data-message-index="0">ENTREGAS DE 5 A 10 DÍAS HÁBILES POR ALTO FLUJO DE PEDIDOS. ¡GRACIAS POR TU PACIENCIA!</p>
-            <p class="announcement-bar__message h5" data-message-index="1">HASTA 50% DCTO EN REF. SELECCIONADAS | EXCLUSIVO ONLINE | COMPRA AHORA</p>
-            <p class="announcement-bar__message h5" data-message-index="2">ENVÍO GRATIS POR COMPRAS SUPERIORES A $350.000</p>
+            <p class="announcement-bar__message h5 active" data-message-index="0" aria-live="polite">ENTREGAS DE 5 A 10 DÍAS HÁBILES POR ALTO FLUJO DE PEDIDOS. ¡GRACIAS POR TU PACIENCIA!</p>
+            <p class="announcement-bar__message h5" data-message-index="1" aria-live="polite">HASTA 50% DCTO EN REF. SELECCIONADAS | EXCLUSIVO ONLINE | COMPRA AHORA</p>
+            <p class="announcement-bar__message h5" data-message-index="2" aria-live="polite">ENVÍO GRATIS POR COMPRAS SUPERIORES A $350.000</p>
         </div>
     </div>
 
@@ -125,10 +126,10 @@
                     </div>
                 </div>
             </div>
-            <div class="hero-banner__dots">
-                <button class="hero-banner__dot active" data-dot-index="0" aria-label="Go to slide 1"></button>
-                <button class="hero-banner__dot" data-dot-index="1" aria-label="Go to slide 2"></button>
-                <button class="hero-banner__dot" data-dot-index="2" aria-label="Go to slide 3"></button>
+            <div class="hero-banner__dots" role="group" aria-label="Navegación del carrusel">
+                <button class="hero-banner__dot active" data-dot-index="0" aria-label="Ir a la diapositiva 1" aria-current="true"></button>
+                <button class="hero-banner__dot" data-dot-index="1" aria-label="Ir a la diapositiva 2"></button>
+                <button class="hero-banner__dot" data-dot-index="2" aria-label="Ir a la diapositiva 3"></button>
             </div>
         </div>
         
@@ -136,9 +137,9 @@
         <div class="scratch-stripes-top"></div>
 
         <!-- Featured Collection -->
-        <div class="featured-collection color-background-1 gradient">
+        <section class="featured-collection color-background-1 gradient" aria-labelledby="FeaturedCollectionTitle">
             <div class="page-width">
-                <h2 class="featured-collection__title h1">LO NUEVO | CAMISETAS EXCLUSIVAS</h2>
+                <h2 id="FeaturedCollectionTitle" class="featured-collection__title h1">LO NUEVO | CAMISETAS EXCLUSIVAS</h2>
                 <div class="product-grid grid grid--4-col-desktop grid--2-col-tablet-down">
                     <!-- Product Cards -->
                     <div class="product-card">
@@ -207,10 +208,10 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
         <!-- Collection Banners Carousel -->
-        <div class="collection-banners color-background-1 gradient">
+        <section class="collection-banners color-background-1 gradient" aria-label="Colecciones destacadas">
             <div class="page-width">
                 <div class="collection-banners__carousel">
                     <!-- Grid 1: BUSOS and GORRAS -->
@@ -265,10 +266,10 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
         <!-- Featured Product Carousel -->
-        <div class="featured-product color-background-1 gradient">
+        <section class="featured-product color-background-1 gradient" aria-label="Producto destacado">
             <div class="page-width">
                 <div class="featured-product__carousel">
                     <!-- Slide 1: LOCAL 2025 -->
@@ -307,14 +308,14 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
         <!-- Slogan Section -->
-        <div class="slogan-section color-background-1 gradient">
+        <section class="slogan-section color-background-1 gradient" aria-label="Eslogan">
             <div class="page-width">
                 <h2 class="slogan-section__text h1">VERDE Y BLANCO: UNA PASIÓN DE DOS COLORES.</h2>
             </div>
-        </div>
+        </section>
 
         <!-- Beige Scratched Stripes Bottom -->
         <div class="scratch-stripes-bottom"></div>
@@ -354,10 +355,11 @@
                 <div class="footer-block">
                     <h2 class="footer-block__heading h4">¡SUSCRÍBETE A NUESTRO NEWSLETTER!</h2>
                     <p class="footer-block__text">¡Suscríbete al mundo verdolaga y conoce todas las ofertas y noticias que tenemos para ti!</p>
-                    <form class="newsletter-form">
+                    <form class="newsletter-form" aria-label="Suscripción al newsletter">
                         <div class="newsletter-form__field-wrapper">
                             <div class="field">
-                                <input type="email" class="field__input" placeholder="Email" required>
+                                <label for="NewsletterEmail" class="visually-hidden">Correo electrónico</label>
+                                <input id="NewsletterEmail" type="email" name="email" class="field__input" placeholder="Correo electrónico" required aria-required="true">
                             </div>
                             <button type="submit" class="button button--primary newsletter-form__button">Suscribirse</button>
                         </div>
@@ -392,8 +394,8 @@
     </footer>
 
     <!-- Back to Top Button -->
-    <button class="back-to-top" aria-label="Back to top">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <button class="back-to-top" aria-label="Volver arriba" title="Volver arriba">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <use href="#icon-arrow-up"></use>
         </svg>
     </button>

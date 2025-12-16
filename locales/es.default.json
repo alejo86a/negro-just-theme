@@ -30,6 +30,12 @@
     },
     "featured_collection": {
       "view_all": "Ver Todo"
+    },
+    "footer": {
+      "copyright": "Todos los derechos reservados."
+    },
+    "hero_banner": {
+      "go_to_slide": "Ir a la diapositiva {{ number }}"
     }
   },
   "products": {
@@ -54,11 +60,6 @@
     "label": "Correo electrónico",
     "button_label": "Suscribirse",
     "success": "¡Gracias por suscribirte!"
-  },
-  "sections": {
-    "footer": {
-      "copyright": "Todos los derechos reservados."
-    }
   }
 }
 

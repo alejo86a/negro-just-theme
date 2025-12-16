@@ -1,0 +1,148 @@
+{
+  "sections": {
+    "hero_banner": {
+      "type": "hero-banner",
+      "blocks": {
+        "slide_1": {
+          "type": "slide",
+          "settings": {
+            "heading": "NUEVA COLECCIÓN",
+            "text": "<p>Descubre la pasión verdolaga</p>",
+            "button_label": "CONÓCELA AQUÍ",
+            "button_link": ""
+          }
+        },
+        "slide_2": {
+          "type": "slide",
+          "settings": {
+            "heading": "BUSO RETRO LIBERTADORES '89",
+            "text": "<p>Edición limitada</p>",
+            "button_label": "COMPRAR BUSOS",
+            "button_link": ""
+          }
+        },
+        "slide_3": {
+          "type": "slide",
+          "settings": {
+            "heading": "CAMISETA LOCAL 2025",
+            "text": "<p>La nueva camiseta oficial</p>",
+            "button_label": "COMPRAR AHORA",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_1",
+        "slide_2",
+        "slide_3"
+      ],
+      "settings": {
+        "color_scheme": "background-1"
+      }
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "LO NUEVO | CAMISETAS EXCLUSIVAS",
+        "products_to_show": 4,
+        "show_view_all": true,
+        "color_scheme": "background-1"
+      }
+    },
+    "collection_banners": {
+      "type": "collection-banners",
+      "blocks": {
+        "banner_1": {
+          "type": "banner",
+          "settings": {
+            "heading": "BUSOS",
+            "text": "Explora nuestra colección"
+          }
+        },
+        "banner_2": {
+          "type": "banner",
+          "settings": {
+            "heading": "GORRAS",
+            "text": "Descubre nuestros diseños"
+          }
+        },
+        "banner_3": {
+          "type": "banner",
+          "settings": {
+            "heading": "MEDIAS",
+            "text": "Completa tu look"
+          }
+        },
+        "banner_4": {
+          "type": "banner",
+          "settings": {
+            "heading": "CAMISETAS",
+            "text": "Viste los colores"
+          }
+        }
+      },
+      "block_order": [
+        "banner_1",
+        "banner_2",
+        "banner_3",
+        "banner_4"
+      ],
+      "settings": {
+        "color_scheme": "background-1"
+      }
+    },
+    "featured_product": {
+      "type": "featured-product",
+      "blocks": {
+        "product_slide_1": {
+          "type": "product_slide",
+          "settings": {
+            "media_text": "LOCAL<br>2025",
+            "title": "EL EQUIPO OFICIAL",
+            "product_title": "Camiseta ¡LOCAL 2025!",
+            "description": "La camiseta oficial del equipo verdolaga para la temporada 2025.",
+            "price": "$99.99",
+            "button_label": "Agregar al Carrito",
+            "button_link": ""
+          }
+        },
+        "product_slide_2": {
+          "type": "product_slide",
+          "settings": {
+            "media_text": "VISITANTE<br>2025",
+            "title": "LA NUEVA ALTERNATIVA",
+            "product_title": "Camiseta ¡VISITANTE 2025!",
+            "description": "La nueva camiseta de visitante para la temporada 2025.",
+            "price": "$99.99",
+            "button_label": "Agregar al Carrito",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "product_slide_1",
+        "product_slide_2"
+      ],
+      "settings": {
+        "color_scheme": "background-1"
+      }
+    },
+    "slogan_section": {
+      "type": "slogan-section",
+      "settings": {
+        "slogan": "VERDE Y BLANCO: UNA PASIÓN DE DOS COLORES.",
+        "color_scheme": "background-1"
+      }
+    }
+  },
+  "order": [
+    "hero_banner",
+    "featured_collection",
+    "collection_banners",
+    "featured_product",
+    "slogan_section"
+  ]
+}
+
+
+
